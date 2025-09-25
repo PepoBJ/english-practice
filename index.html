@@ -555,6 +555,7 @@
                 <button class="sidebar-tab active" onclick="showSection('grammar')">📝 Grammar</button>
                 <button class="sidebar-tab" onclick="showSection('vocabulary')">📖 Vocab</button>
                 <button class="sidebar-tab" onclick="showSection('verbs')">🔤 Verbs</button>
+                <button class="sidebar-tab" onclick="showSection('writing')">✍️ Writing</button>
             </div>
             
             <input type="text" class="search-box" placeholder="🔍 Search topics..." onkeyup="searchTopics(this.value)">
@@ -603,6 +604,7 @@
                     <button class="mobile-section-tab active" onclick="showSectionMobile('grammar')">📖 Grammar</button>
                     <button class="mobile-section-tab" onclick="showSectionMobile('vocabulary')">📝 Vocabulary</button>
                     <button class="mobile-section-tab" onclick="showSectionMobile('verbs')">⚡ Verbs</button>
+                    <button class="mobile-section-tab" onclick="showSectionMobile('writing')">✍️ Writing</button>
                 </div>
                 
                 <div class="topic-list" id="mobile-topic-list">
@@ -640,7 +642,8 @@
         let allTopics = {
             grammar: [],
             vocabulary: [],
-            verbs: { regular: [], irregular: [] }
+            verbs: { regular: [], irregular: [] },
+            writing: []
         };
         
         // DOM Elements Cache
@@ -706,6 +709,11 @@
                         { title: 'Regular Verbs', type: 'regular' },
                         { title: 'Irregular Verbs', type: 'irregular' }
                     ];
+                    break;
+                    
+                case 'writing':
+                    currentTopics = allTopics.writing;
+                    topicHTML = generateTopicHTML(currentTopics, 'selectTopic');
                     break;
             }
             
@@ -927,7 +935,8 @@
                 tab.classList.remove('active');
                 if ((sectionName === 'grammar' && index === 0) ||
                     (sectionName === 'vocabulary' && index === 1) ||
-                    (sectionName === 'verbs' && index === 2)) {
+                    (sectionName === 'verbs' && index === 2) ||
+                    (sectionName === 'writing' && index === 3)) {
                     tab.classList.add('active');
                 }
             });
@@ -965,12 +974,14 @@
             loadGrammarTopics();
             loadVocabularyTopics();
             loadVerbTables();
+            loadWritingTopics();
             
             setTimeout(() => {
                 allTopics.grammar = grammarTopics || [];
                 allTopics.vocabulary = vocabularyTopics || [];
                 allTopics.verbs.regular = regularVerbs || [];
                 allTopics.verbs.irregular = irregularVerbs || [];
+                allTopics.writing = writingTopics || [];
                 
                 loadTopicList();
             }, 100);
@@ -980,5 +991,6 @@
     <script src="js/grammar-content.js"></script>
     <script src="js/vocabulary-content.js"></script>
     <script src="js/verbs-content.js"></script>
+    <script src="js/writing-content.js"></script>
 </body>
 </html>
