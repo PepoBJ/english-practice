@@ -1,5 +1,7 @@
+let vocabularyTopics = [];
+
 function loadVocabularyTopics() {
-    const vocabularyTopics = [
+    vocabularyTopics = [
         {
             title: "Greetings",
             definition: "Common expressions used when meeting, greeting, or saying goodbye to people.",
@@ -192,50 +194,4 @@ function loadVocabularyTopics() {
             ]
         }
     ];
-
-    const container = document.getElementById('vocabulary-topics');
-    container.innerHTML = '';
-
-    vocabularyTopics.forEach(topic => {
-        const topicDiv = document.createElement('div');
-        topicDiv.className = 'topic';
-        
-        let exercisesHtml = '';
-        if (topic.exercises) {
-            exercisesHtml = `
-                <div class="exercise">
-                    <h4>💪 Practice Exercises:</h4>
-                    ${topic.exercises.map((ex, index) => `
-                        <div class="exercise-question">${index + 1}. ${ex.question}</div>
-                        <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
-                        <div class="exercise-answer">${ex.answer}</div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        topicDiv.innerHTML = `
-            <div class="topic-header" onclick="toggleTopic(this.parentElement)">
-                <h3>${topic.title}</h3>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="topic-content">
-                <div class="definition">
-                    <h4>📖 Definition:</h4>
-                    <p>${topic.definition}</p>
-                </div>
-                <div class="structure">
-                    <h4>🏗️ Structure/Usage:</h4>
-                    <p>${topic.structure}</p>
-                </div>
-                <div class="examples">
-                    <h4>✨ Examples:</h4>
-                    <p>${topic.examples}</p>
-                </div>
-                ${exercisesHtml}
-            </div>
-        `;
-        
-        container.appendChild(topicDiv);
-    });
 }

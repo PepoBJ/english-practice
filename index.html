@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English A2 Study Guide</title>
     <style>
+        :root {
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --secondary-color: #6c757d;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #e91e63;
+            --info-color: #2196f3;
+            --purple-color: #9c27b0;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+            --text-color: #333;
+            --text-muted: #6c757d;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,155 +33,252 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .tabs {
-            display: flex;
-            background: white;
-            border-radius: 10px 10px 0 0;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .tab.active {
-            background: #007bff;
-            color: white;
-        }
-        
-        .tab:hover {
-            background: #0056b3;
-            color: white;
-        }
-        
-        .content {
-            background: white;
-            border-radius: 0 0 10px 10px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            min-height: 600px;
-        }
-        
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        .section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .topic {
-            margin-bottom: 25px;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
+            color: var(--text-color);
+            background: var(--light-bg);
+            height: 100vh;
             overflow: hidden;
         }
         
-        .topic-header {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            cursor: pointer;
+        .app-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
+            height: 100vh;
         }
         
-        .topic-header:hover {
-            background: #e9ecef;
-        }
-        
-        .topic-header h3 {
-            color: #495057;
-            font-size: 1.2em;
-        }
-        
-        .toggle-icon {
-            font-size: 1.2em;
+        /* SIDEBAR */
+        .sidebar {
+            width: 320px;
+            background: var(--white);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
             transition: transform 0.3s ease;
         }
         
-        .topic.expanded .toggle-icon {
-            transform: rotate(180deg);
+        .sidebar-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-tabs {
+            display: flex;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-tab {
+            flex: 1;
+            padding: 12px 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .sidebar-tab.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .search-box {
+            margin: 15px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            font-size: 0.9em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .topic-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+        
+        .topic-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f3f4;
+            transition: var(--transition);
+            font-size: 0.9em;
+        }
+        
+        .topic-item:hover {
+            background: var(--light-bg);
+        }
+        
+        .topic-item.active {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info-color);
+            font-weight: bold;
+        }
+        
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            background: var(--white);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .content-title h2 {
+            color: #495057;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .content-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: var(--transition);
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: var(--primary-hover);
+        }
+        
+        .nav-btn:disabled {
+            background: var(--secondary-color);
+            cursor: not-allowed;
+        }
+        
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
         }
         
         .topic-content {
-            display: none;
-            padding: 20px;
-            background: white;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-in;
         }
         
-        .topic.expanded .topic-content {
-            display: block;
-        }
-        
+        /* CONTENT SECTIONS */
         .definition {
             background: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2196f3;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--info-color);
+        }
+        
+        .definition::before {
+            content: "📖 Definition";
+            display: block;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
         }
         
         .structure {
             background: #f3e5f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #9c27b0;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--purple-color);
+        }
+        
+        .structure::before {
+            content: "🏗️ Structure";
+            display: block;
+            font-weight: bold;
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+        
+        .tips {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--warning-color);
+        }
+        
+        .tips::before {
+            content: "💡 Tips";
+            display: block;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
         }
         
         .examples {
             background: #e8f5e8;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .examples::before {
+            content: "✨ Examples";
+            display: block;
+            font-weight: bold;
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+        
+        .exercises-section {
+            background: #fce4ec;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--danger-color);
+        }
+        
+        .exercises-section::before {
+            content: "💪 Exercises";
+            display: block;
+            font-weight: bold;
+            color: #c2185b;
             margin-bottom: 15px;
-            border-left: 4px solid #4caf50;
         }
         
         .exercise {
-            background: #fff3e0;
+            background: var(--white);
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 15px;
-            border-left: 4px solid #ff9800;
+            border: 1px solid #f8bbd9;
         }
         
         .exercise-question {
@@ -172,56 +288,28 @@
         
         .exercise-answer {
             display: none;
-            background: #f5f5f5;
+            background: var(--light-bg);
             padding: 10px;
             border-radius: 3px;
             margin-top: 10px;
         }
         
         .show-answer-btn {
-            background: #ff9800;
-            color: white;
+            background: var(--danger-color);
+            color: var(--white);
             border: none;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
-            transition: background 0.3s ease;
+            transition: var(--transition);
         }
         
         .show-answer-btn:hover {
-            background: #f57c00;
+            background: #c2185b;
         }
         
-        .search-box {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 1em;
-            margin-bottom: 20px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        
-        .search-box:focus {
-            border-color: #007bff;
-        }
-        
-        .highlight {
-            background-color: yellow;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        
-        .verb-section {
-            display: none;
-        }
-        
-        .verb-section.active {
-            display: block;
-        }
-        
+        /* VERB TABLES */
         .verb-table {
             width: 100%;
             border-collapse: collapse;
@@ -237,7 +325,7 @@
         }
         
         .verb-table th {
-            background-color: #f8f9fa;
+            background-color: var(--light-bg);
             font-weight: bold;
             position: sticky;
             top: 0;
@@ -251,179 +339,448 @@
             background-color: #e3f2fd;
         }
         
-        .tips {
-            background: #fff8e1;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #ffc107;
+        /* MOBILE FAB */
+        .mobile-fab {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
         }
         
-        .tips h4 {
-            color: #f57c00;
-            margin-bottom: 10px;
+        .mobile-fab:hover {
+            transform: scale(1.1);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        
+        .mobile-menu-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: 20px 20px 0 0;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                z-index: 1001;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                width: 100%;
+            }
+            
+            .mobile-fab {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .content-header {
+                padding: 15px 20px;
+            }
+            
+            .content-body {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .tabs {
+            .content-header {
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
             }
             
-            .content {
-                padding: 20px;
+            .navigation-buttons {
+                width: 100%;
+                justify-content: space-between;
             }
+        }
+        
+        .highlight {
+            background-color: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📚 English A2 Study Guide</h1>
-            <p>Complete guide for your A2 English exam</p>
-        </div>
-        
-        <div class="tabs">
-            <button class="tab active" onclick="showSection('grammar')">📝 Grammar</button>
-            <button class="tab" onclick="showSection('vocabulary')">📖 Vocabulary</button>
-            <button class="tab" onclick="showSection('verbs')">🔤 Verbs</button>
-        </div>
-        
-        <div class="content">
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>📚 English A2</h1>
+                <p>Study Guide</p>
+            </div>
+            
+            <div class="sidebar-tabs">
+                <button class="sidebar-tab active" onclick="showSection('grammar')">📝 Grammar</button>
+                <button class="sidebar-tab" onclick="showSection('vocabulary')">📖 Vocab</button>
+                <button class="sidebar-tab" onclick="showSection('verbs')">🔤 Verbs</button>
+            </div>
+            
             <input type="text" class="search-box" placeholder="🔍 Search topics..." onkeyup="searchTopics(this.value)">
             
-            <div id="grammar" class="section active">
-                <h2>Grammar Topics</h2>
-                <div id="grammar-topics"></div>
-            </div>
-            
-            <div id="vocabulary" class="section">
-                <h2>Vocabulary Topics</h2>
-                <div id="vocabulary-topics"></div>
-            </div>
-            
-            <div id="verbs" class="section">
-                <h2>Essential Verbs</h2>
-                <div class="tabs" style="margin-bottom: 20px;">
-                    <button class="tab active" onclick="showVerbSection('regular')">📋 Regular Verbs</button>
-                    <button class="tab" onclick="showVerbSection('irregular')">⚡ Irregular Verbs</button>
-                </div>
-                <div id="regular-verbs" class="verb-section active"></div>
-                <div id="irregular-verbs" class="verb-section"></div>
+            <div class="topic-list" id="topic-list">
+                <!-- Topics will be loaded here -->
             </div>
         </div>
-    </div>
+        
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="content-header">
+                <div class="content-title">
+                    <h2 id="current-topic-title">Select a topic</h2>
+                    <div class="content-subtitle" id="current-topic-subtitle">Choose from the sidebar to start learning</div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-btn" id="prev-btn" onclick="navigateTopic(-1)" disabled>← Previous</button>
+                    <button class="nav-btn" id="next-btn" onclick="navigateTopic(1)" disabled>Next →</button>
+                </div>
+            </div>
+            
+            <div class="content-body">
+                <div class="topic-content" id="topic-content">
+                    <div style="text-align: center; color: #6c757d; margin-top: 100px;">
+                        <h3>Welcome to your English A2 Study Guide</h3>
+                        <p>Select a topic from the sidebar to begin your learning journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MOBILE FAB -->
+        <button class="mobile-fab" id="mobile-fab" onclick="toggleMobileMenu()">⚡</button>
+        
+        <!-- MOBILE MENU -->
+        <div class="mobile-menu" id="mobile-menu" onclick="closeMobileMenu()">
+            <div class="mobile-menu-content" onclick="event.stopPropagation()">
+                <div class="mobile-menu-header">
+                    <h3>📚 Topics</h3>
+                </div>
+                <div class="topic-list" id="mobile-topic-list">
+                    <!-- Mobile topics will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div></body>
 
     <script>
-        function showSection(sectionName) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionName).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
+        // Constants
+        const SECTIONS = {
+            GRAMMAR: 'grammar',
+            VOCABULARY: 'vocabulary',
+            VERBS: 'verbs'
+        };
+        
+        const VERB_TYPES = {
+            REGULAR: 'regular',
+            IRREGULAR: 'irregular'
+        };
+        
+        // State
+        let currentSection = SECTIONS.GRAMMAR;
+        let currentTopicIndex = -1;
+        let currentTopics = [];
+        let allTopics = {
+            grammar: [],
+            vocabulary: [],
+            verbs: { regular: [], irregular: [] }
+        };
+        
+        // DOM Elements Cache
+        const elements = {
+            topicList: null,
+            mobileTopicList: null,
+            titleEl: null,
+            subtitleEl: null,
+            contentEl: null,
+            prevBtn: null,
+            nextBtn: null,
+            mobileMenu: null
+        };
+        
+        function cacheElements() {
+            elements.topicList = document.getElementById('topic-list');
+            elements.mobileTopicList = document.getElementById('mobile-topic-list');
+            elements.titleEl = document.getElementById('current-topic-title');
+            elements.subtitleEl = document.getElementById('current-topic-subtitle');
+            elements.contentEl = document.getElementById('topic-content');
+            elements.prevBtn = document.getElementById('prev-btn');
+            elements.nextBtn = document.getElementById('next-btn');
+            elements.mobileMenu = document.getElementById('mobile-menu');
         }
         
-        function toggleTopic(topicElement) {
-            topicElement.classList.toggle('expanded');
+        function showSection(sectionName) {
+            currentSection = sectionName;
+            
+            // Update sidebar tabs
+            document.querySelectorAll('.sidebar-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadTopicList();
+            currentTopicIndex = -1;
+            showWelcomeMessage();
+        }
+        
+        function loadTopicList() {
+            if (!elements.topicList || !elements.mobileTopicList) return;
+            
+            let topicHTML = '';
+            
+            switch (currentSection) {
+                case SECTIONS.GRAMMAR:
+                    currentTopics = allTopics.grammar;
+                    topicHTML = generateTopicHTML(currentTopics, 'selectTopic');
+                    break;
+                    
+                case SECTIONS.VOCABULARY:
+                    currentTopics = allTopics.vocabulary;
+                    topicHTML = generateTopicHTML(currentTopics, 'selectTopic');
+                    break;
+                    
+                case SECTIONS.VERBS:
+                    topicHTML = generateVerbsHTML();
+                    currentTopics = [...allTopics.verbs.regular, ...allTopics.verbs.irregular];
+                    break;
+            }
+            
+            elements.topicList.innerHTML = topicHTML;
+            elements.mobileTopicList.innerHTML = topicHTML;
+        }
+        
+        function generateTopicHTML(topics, clickHandler) {
+            return topics.map((topic, index) => 
+                `<div class="topic-item" onclick="${clickHandler}(${index})">${topic.title}</div>`
+            ).join('');
+        }
+        
+        function generateVerbsHTML() {
+            let html = '<div style="padding: 10px 20px; background: #e3f2fd; font-weight: bold; color: #1976d2;">📋 Regular Verbs</div>';
+            
+            allTopics.verbs.regular.forEach((verb, index) => {
+                html += `<div class="topic-item" onclick="selectVerbTopic('${VERB_TYPES.REGULAR}', ${index})">${verb.title}</div>`;
+            });
+            
+            html += '<div style="padding: 10px 20px; background: #fce4ec; font-weight: bold; color: #c2185b; margin-top: 10px;">⚡ Irregular Verbs</div>';
+            
+            allTopics.verbs.irregular.forEach((verb, index) => {
+                html += `<div class="topic-item" onclick="selectVerbTopic('${VERB_TYPES.IRREGULAR}', ${index})">${verb.title}</div>`;
+            });
+            
+            return html;
+        }
+        
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            updateActiveTopicUI(index);
+            showTopicContent(currentTopics[index]);
+            updateNavigationButtons();
+            closeMobileMenu();
+        }
+        
+        function selectVerbTopic(type, index) {
+            const verb = allTopics.verbs[type][index];
+            const globalIndex = type === VERB_TYPES.REGULAR ? index : allTopics.verbs.regular.length + index;
+            
+            currentTopicIndex = globalIndex;
+            
+            // Update active topic in sidebar
+            const allItems = document.querySelectorAll('.topic-item');
+            const targetIndex = type === VERB_TYPES.REGULAR ? index + 1 : allTopics.verbs.regular.length + index + 2;
+            
+            updateActiveTopicUI(targetIndex, allItems);
+            showTopicContent(verb);
+            updateNavigationButtons();
+            closeMobileMenu();
+        }
+        
+        function updateActiveTopicUI(index, items = null) {
+            const topicItems = items || document.querySelectorAll('.topic-item');
+            topicItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+        
+        function showTopicContent(topic) {
+            if (!elements.titleEl || !elements.subtitleEl || !elements.contentEl || !topic) return;
+            
+            elements.titleEl.textContent = topic.title;
+            elements.subtitleEl.textContent = `${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)} • Topic ${currentTopicIndex + 1} of ${currentTopics.length}`;
+            
+            const contentHTML = currentSection === SECTIONS.VERBS 
+                ? createVerbContent(topic) 
+                : createRegularContent(topic);
+            
+            elements.contentEl.innerHTML = contentHTML;
+        }
+        
+        function createVerbContent(verb) {
+            return `
+                <div class="definition">
+                    <strong>Base Form:</strong> ${verb.base}<br>
+                    <strong>Past Simple:</strong> ${verb.past}<br>
+                    <strong>Past Participle:</strong> ${verb.participle}<br>
+                    <strong>Spanish:</strong> ${verb.spanish}
+                </div>
+                <div class="examples">
+                    ${verb.examples.map(example => `• ${example}`).join('<br>')}
+                </div>
+            `;
+        }
+        
+        function createRegularContent(topic) {
+            let html = '';
+            
+            if (topic.definition) html += `<div class="definition">${topic.definition}</div>`;
+            if (topic.structure) html += `<div class="structure">${topic.structure}</div>`;
+            if (topic.tips) html += `<div class="tips">${topic.tips}</div>`;
+            if (topic.examples) html += `<div class="examples">${topic.examples}</div>`;
+            
+            if (topic.exercises?.length > 0) {
+                html += '<div class="exercises-section">';
+                topic.exercises.forEach((exercise, index) => {
+                    html += `
+                        <div class="exercise">
+                            <div class="exercise-question">${index + 1}. ${exercise.question}</div>
+                            <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
+                            <div class="exercise-answer">${exercise.answer}</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+            
+            return html;
+        }
+        
+        function showWelcomeMessage() {
+            if (!elements.titleEl || !elements.subtitleEl || !elements.contentEl) return;
+            
+            elements.titleEl.textContent = 'Select a topic';
+            elements.subtitleEl.textContent = 'Choose from the sidebar to start learning';
+            elements.contentEl.innerHTML = `
+                <div style="text-align: center; color: var(--text-muted); margin-top: 100px;">
+                    <h3>Welcome to your English A2 Study Guide</h3>
+                    <p>Select a topic from the sidebar to begin your learning journey.</p>
+                </div>
+            `;
+            updateNavigationButtons();
+        }
+        
+        function navigateTopic(direction) {
+            const newIndex = currentTopicIndex + direction;
+            if (newIndex >= 0 && newIndex < currentTopics.length) {
+                selectTopic(newIndex);
+            }
+        }
+        
+        function updateNavigationButtons() {
+            if (!elements.prevBtn || !elements.nextBtn) return;
+            
+            elements.prevBtn.disabled = currentTopicIndex <= 0;
+            elements.nextBtn.disabled = currentTopicIndex >= currentTopics.length - 1 || currentTopicIndex === -1;
         }
         
         function showAnswer(button) {
             const answer = button.nextElementSibling;
-            if (answer.style.display === 'none' || answer.style.display === '') {
-                answer.style.display = 'block';
-                button.textContent = 'Hide Answer';
-            } else {
-                answer.style.display = 'none';
-                button.textContent = 'Show Answer';
-            }
+            const isHidden = answer.style.display === 'none' || answer.style.display === '';
+            
+            answer.style.display = isHidden ? 'block' : 'none';
+            button.textContent = isHidden ? 'Hide Answer' : 'Show Answer';
         }
         
         function searchTopics(searchTerm) {
-            const topics = document.querySelectorAll('.topic');
+            const topics = document.querySelectorAll('.topic-item');
             const term = searchTerm.toLowerCase();
             
             topics.forEach(topic => {
-                const text = topic.textContent.toLowerCase();
-                if (text.includes(term)) {
-                    topic.style.display = 'block';
-                    // Highlight search term
-                    if (term) {
-                        highlightText(topic, term);
-                    }
-                } else {
-                    topic.style.display = 'none';
-                }
+                const isVisible = topic.textContent.toLowerCase().includes(term);
+                topic.style.display = isVisible ? 'block' : 'none';
             });
         }
         
-        function highlightText(element, term) {
-            // Simple highlight function
-            const walker = document.createTreeWalker(
-                element,
-                NodeFilter.SHOW_TEXT,
-                null,
-                false
-            );
-            
-            const textNodes = [];
-            let node;
-            
-            while (node = walker.nextNode()) {
-                textNodes.push(node);
+        function toggleMobileMenu() {
+            if (elements.mobileMenu) {
+                const isVisible = elements.mobileMenu.style.display === 'block';
+                elements.mobileMenu.style.display = isVisible ? 'none' : 'block';
             }
-            
-            textNodes.forEach(textNode => {
-                const text = textNode.textContent;
-                const regex = new RegExp(`(${term})`, 'gi');
-                if (regex.test(text)) {
-                    const highlightedText = text.replace(regex, '<span class="highlight">$1</span>');
-                    const wrapper = document.createElement('span');
-                    wrapper.innerHTML = highlightedText;
-                    textNode.parentNode.replaceChild(wrapper, textNode);
-                }
-            });
         }
         
-        function showVerbSection(sectionName) {
-            // Hide all verb sections
-            document.querySelectorAll('.verb-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remove active class from verb tabs
-            document.querySelectorAll('#verbs .tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected verb section
-            document.getElementById(sectionName + '-verbs').classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
+        function closeMobileMenu() {
+            if (elements.mobileMenu) {
+                elements.mobileMenu.style.display = 'none';
+            }
         }
         
-        // Load content when page loads
+        // Event Listeners
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') navigateTopic(-1);
+            else if (e.key === 'ArrowRight') navigateTopic(1);
+        });
+        
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            cacheElements();
             loadGrammarTopics();
             loadVocabularyTopics();
             loadVerbTables();
+            
+            setTimeout(() => {
+                allTopics.grammar = grammarTopics || [];
+                allTopics.vocabulary = vocabularyTopics || [];
+                allTopics.verbs.regular = regularVerbs || [];
+                allTopics.verbs.irregular = irregularVerbs || [];
+                
+                loadTopicList();
+            }, 100);
         });
     </script>
     
