@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English A2 Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .tab:hover {
+            background: #0056b3;
+            color: white;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 10px 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .topic {
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .topic-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .topic-header:hover {
+            background: #e9ecef;
+        }
+        
+        .topic-header h3 {
+            color: #495057;
+            font-size: 1.2em;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .topic.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .topic-content {
+            display: none;
+            padding: 20px;
+            background: white;
+        }
+        
+        .topic.expanded .topic-content {
+            display: block;
+        }
+        
+        .definition {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .structure {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .examples {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .exercise {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .exercise-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-answer {
+            display: none;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+        
+        .show-answer-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        
+        .show-answer-btn:hover {
+            background: #f57c00;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1em;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #007bff;
+        }
+        
+        .highlight {
+            background-color: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .verb-section {
+            display: none;
+        }
+        
+        .verb-section.active {
+            display: block;
+        }
+        
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .verb-table th,
+        .verb-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .verb-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        .verb-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .verb-table tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .tips {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .tips h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 English A2 Study Guide</h1>
+            <p>Complete guide for your A2 English exam</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('grammar')">📝 Grammar</button>
+            <button class="tab" onclick="showSection('vocabulary')">📖 Vocabulary</button>
+            <button class="tab" onclick="showSection('verbs')">🔤 Verbs</button>
+        </div>
+        
+        <div class="content">
+            <input type="text" class="search-box" placeholder="🔍 Search topics..." onkeyup="searchTopics(this.value)">
+            
+            <div id="grammar" class="section active">
+                <h2>Grammar Topics</h2>
+                <div id="grammar-topics"></div>
+            </div>
+            
+            <div id="vocabulary" class="section">
+                <h2>Vocabulary Topics</h2>
+                <div id="vocabulary-topics"></div>
+            </div>
+            
+            <div id="verbs" class="section">
+                <h2>Essential Verbs</h2>
+                <div class="tabs" style="margin-bottom: 20px;">
+                    <button class="tab active" onclick="showVerbSection('regular')">📋 Regular Verbs</button>
+                    <button class="tab" onclick="showVerbSection('irregular')">⚡ Irregular Verbs</button>
+                </div>
+                <div id="regular-verbs" class="verb-section active"></div>
+                <div id="irregular-verbs" class="verb-section"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function toggleTopic(topicElement) {
+            topicElement.classList.toggle('expanded');
+        }
+        
+        function showAnswer(button) {
+            const answer = button.nextElementSibling;
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+                button.textContent = 'Hide Answer';
+            } else {
+                answer.style.display = 'none';
+                button.textContent = 'Show Answer';
+            }
+        }
+        
+        function searchTopics(searchTerm) {
+            const topics = document.querySelectorAll('.topic');
+            const term = searchTerm.toLowerCase();
+            
+            topics.forEach(topic => {
+                const text = topic.textContent.toLowerCase();
+                if (text.includes(term)) {
+                    topic.style.display = 'block';
+                    // Highlight search term
+                    if (term) {
+                        highlightText(topic, term);
+                    }
+                } else {
+                    topic.style.display = 'none';
+                }
+            });
+        }
+        
+        function highlightText(element, term) {
+            // Simple highlight function
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const regex = new RegExp(`(${term})`, 'gi');
+                if (regex.test(text)) {
+                    const highlightedText = text.replace(regex, '<span class="highlight">$1</span>');
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = highlightedText;
+                    textNode.parentNode.replaceChild(wrapper, textNode);
+                }
+            });
+        }
+        
+        function showVerbSection(sectionName) {
+            // Hide all verb sections
+            document.querySelectorAll('.verb-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from verb tabs
+            document.querySelectorAll('#verbs .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected verb section
+            document.getElementById(sectionName + '-verbs').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Load content when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGrammarTopics();
+            loadVocabularyTopics();
+            loadVerbTables();
+        });
+    </script>
+    
+    <script src="js/grammar-content.js"></script>
+    <script src="js/vocabulary-content.js"></script>
+    <script src="js/verbs-content.js"></script>
+</body>
+</html>
