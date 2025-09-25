@@ -776,6 +776,87 @@
             return null;
         }
 
+        // Text-to-Speech functionality
+        function speakText(text, rate = 0.8) {
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = rate; // Slightly slower for learning
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                speechSynthesis.speak(utterance);
+            } else {
+                console.log('Speech synthesis not supported');
+            }
+        }
+
+        function createSpeakButton(text, size = 'small') {
+            const button = document.createElement('button');
+            button.innerHTML = '🔊';
+            button.title = 'Listen to pronunciation';
+            button.className = `speak-btn speak-btn-${size}`;
+            
+            const baseStyle = `
+                background: #e3f2fd;
+                color: #1976d2;
+                border: 1px solid #bbdefb;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.2s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 6px;
+                vertical-align: middle;
+            `;
+            
+            if (size === 'small') {
+                button.style.cssText = baseStyle + `
+                    width: 24px;
+                    height: 24px;
+                    font-size: 0.8em;
+                `;
+            } else {
+                button.style.cssText = baseStyle + `
+                    width: 32px;
+                    height: 32px;
+                    font-size: 1em;
+                `;
+            }
+            
+            button.onmouseover = () => {
+                button.style.background = '#1976d2';
+                button.style.color = 'white';
+                button.style.transform = 'scale(1.1)';
+            };
+            
+            button.onmouseout = () => {
+                button.style.background = '#e3f2fd';
+                button.style.color = '#1976d2';
+                button.style.transform = 'scale(1)';
+            };
+            
+            button.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                speakText(text);
+                
+                // Visual feedback
+                button.style.background = '#4caf50';
+                button.innerHTML = '🎵';
+                setTimeout(() => {
+                    button.style.background = '#e3f2fd';
+                    button.innerHTML = '🔊';
+                }, 1000);
+            };
+            
+            return button;
+        }
+
         function hideLoadingScreen() {
             const loadingScreen = document.getElementById('loading-screen');
             const appContainer = document.getElementById('app-container');
@@ -1165,11 +1246,42 @@
             `;
             
             verbs.forEach(verb => {
+                const cleanBase = verb.base.replace(/'/g, "\\'");
+                const cleanPast = verb.past.replace(/'/g, "\\'");
+                const cleanParticiple = verb.participle.replace(/'/g, "\\'");
+                
                 tableHTML += `
                     <tr>
-                        <td><strong>${verb.base}</strong></td>
-                        <td>${verb.past}</td>
-                        <td>${verb.participle}</td>
+                        <td>
+                            <strong>${verb.base}</strong>
+                            <button onclick="speakText('${cleanBase}')" 
+                                    style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; 
+                                           border-radius: 50%; width: 20px; height: 20px; cursor: pointer; 
+                                           font-size: 0.7em; margin-left: 4px; transition: all 0.2s;"
+                                    onmouseover="this.style.background='#1976d2'; this.style.color='white'"
+                                    onmouseout="this.style.background='#e3f2fd'; this.style.color='#1976d2'"
+                                    title="Listen to base form">🔊</button>
+                        </td>
+                        <td>
+                            ${verb.past}
+                            <button onclick="speakText('${cleanPast}')" 
+                                    style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; 
+                                           border-radius: 50%; width: 20px; height: 20px; cursor: pointer; 
+                                           font-size: 0.7em; margin-left: 4px; transition: all 0.2s;"
+                                    onmouseover="this.style.background='#1976d2'; this.style.color='white'"
+                                    onmouseout="this.style.background='#e3f2fd'; this.style.color='#1976d2'"
+                                    title="Listen to past form">🔊</button>
+                        </td>
+                        <td>
+                            ${verb.participle}
+                            <button onclick="speakText('${cleanParticiple}')" 
+                                    style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; 
+                                           border-radius: 50%; width: 20px; height: 20px; cursor: pointer; 
+                                           font-size: 0.7em; margin-left: 4px; transition: all 0.2s;"
+                                    onmouseover="this.style.background='#1976d2'; this.style.color='white'"
+                                    onmouseout="this.style.background='#e3f2fd'; this.style.color='#1976d2'"
+                                    title="Listen to participle">🔊</button>
+                        </td>
                         <td><em>${verb.spanish}</em></td>
                         <td>${verb.examples.join('<br>• ')}</td>
                     </tr>
@@ -1250,16 +1362,62 @@
             if (topic.definition) html += `<div class="definition">${topic.definition}</div>`;
             if (topic.structure) html += `<div class="structure">${topic.structure}</div>`;
             if (topic.tips) html += `<div class="tips">${topic.tips}</div>`;
-            if (topic.examples) html += `<div class="examples">${topic.examples}</div>`;
+            
+            // Enhanced examples with audio buttons
+            if (topic.examples) {
+                if (Array.isArray(topic.examples)) {
+                    html += '<div class="examples">';
+                    topic.examples.forEach(example => {
+                        const cleanExample = example.replace(/'/g, "\\'");
+                        html += `
+                            <div style="margin: 8px 0; display: flex; align-items: center; gap: 8px;">
+                                <span>• ${example}</span>
+                                <button onclick="speakText('${cleanExample}')" 
+                                        style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; 
+                                               border-radius: 50%; width: 24px; height: 24px; cursor: pointer; 
+                                               font-size: 0.8em; transition: all 0.2s; flex-shrink: 0;"
+                                        onmouseover="this.style.background='#1976d2'; this.style.color='white'; this.style.transform='scale(1.1)'"
+                                        onmouseout="this.style.background='#e3f2fd'; this.style.color='#1976d2'; this.style.transform='scale(1)'"
+                                        title="Listen to pronunciation">🔊</button>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                } else {
+                    html += `<div class="examples">${topic.examples}</div>`;
+                }
+            }
             
             if (topic.exercises?.length > 0) {
                 html += '<div class="exercises-section">';
                 topic.exercises.forEach((exercise, index) => {
+                    const cleanQuestion = exercise.question.replace(/'/g, "\\'");
+                    const cleanAnswer = exercise.answer.replace(/'/g, "\\'");
                     html += `
                         <div class="exercise">
-                            <div class="exercise-question">${index + 1}. ${exercise.question}</div>
+                            <div class="exercise-question" style="display: flex; align-items: center; gap: 8px;">
+                                <span>${index + 1}. ${exercise.question}</span>
+                                <button onclick="speakText('${cleanQuestion}')" 
+                                        style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; 
+                                               border-radius: 50%; width: 24px; height: 24px; cursor: pointer; 
+                                               font-size: 0.8em; transition: all 0.2s; flex-shrink: 0;"
+                                        onmouseover="this.style.background='#1976d2'; this.style.color='white'; this.style.transform='scale(1.1)'"
+                                        onmouseout="this.style.background='#e3f2fd'; this.style.color='#1976d2'; this.style.transform='scale(1)'"
+                                        title="Listen to question">🔊</button>
+                            </div>
                             <button class="show-answer-btn" onclick="showAnswer(this)">Show Answer</button>
-                            <div class="exercise-answer">${exercise.answer}</div>
+                            <div class="exercise-answer">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span>${exercise.answer}</span>
+                                    <button onclick="speakText('${cleanAnswer}')" 
+                                            style="background: #e8f5e8; color: #2e7d32; border: 1px solid #c8e6c9; 
+                                                   border-radius: 50%; width: 24px; height: 24px; cursor: pointer; 
+                                                   font-size: 0.8em; transition: all 0.2s; flex-shrink: 0;"
+                                            onmouseover="this.style.background='#2e7d32'; this.style.color='white'; this.style.transform='scale(1.1)'"
+                                            onmouseout="this.style.background='#e8f5e8'; this.style.color='#2e7d32'; this.style.transform='scale(1)'"
+                                            title="Listen to answer">🔊</button>
+                                </div>
+                            </div>
                         </div>
                     `;
                 });
