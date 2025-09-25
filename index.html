@@ -812,6 +812,7 @@
             }
             
             elements.contentEl.innerHTML = tableHTML;
+            scrollToTop();
         }
         
         function updateActiveTopicUI(index, items = null) {
@@ -830,11 +831,13 @@
             // For verbs section, handle differently
             if (currentSection === SECTIONS.VERBS && topic.type) {
                 showVerbTable(topic.type);
+                scrollToTop();
                 return;
             }
             
             const contentHTML = createRegularContent(topic);
             elements.contentEl.innerHTML = contentHTML;
+            scrollToTop();
         }
         
         function createRegularContent(topic) {
@@ -862,6 +865,14 @@
             return html;
         }
         
+        function scrollToTop() {
+            // Scroll the content-body container to top (this is where the scroll happens)
+            const contentBody = document.querySelector('.content-body');
+            if (contentBody) {
+                contentBody.scrollTop = 0;
+            }
+        }
+        
         function showWelcomeMessage() {
             if (!elements.titleEl || !elements.subtitleEl || !elements.contentEl) return;
             
@@ -874,6 +885,7 @@
                 </div>
             `;
             updateNavigationButtons();
+            scrollToTop();
         }
         
         function navigateTopic(direction) {
