@@ -137,7 +137,7 @@
         
         .content-header {
             background: var(--white);
-            padding: 20px 30px;
+            padding: 15px 30px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
@@ -146,13 +146,13 @@
         
         .content-title h2 {
             color: #495057;
-            font-size: 1.8em;
-            margin-bottom: 5px;
+            font-size: 1.5em;
+            margin-bottom: 2px;
         }
         
         .content-subtitle {
             color: var(--text-muted);
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         
         .navigation-buttons {
@@ -339,27 +339,78 @@
             background-color: #e3f2fd;
         }
         
+        /* MOBILE NAVIGATION */
+        .mobile-navigation {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 998;
+        }
+        
+        .mobile-nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .mobile-nav-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 123, 255, 0.9);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-nav-btn:hover:not(:disabled) {
+            background: rgba(0, 86, 179, 0.95);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+        }
+        
+        .mobile-nav-btn:disabled {
+            background: rgba(108, 117, 125, 0.6);
+            cursor: not-allowed;
+            opacity: 0.5;
+            box-shadow: 0 2px 6px rgba(108, 117, 125, 0.2);
+        }
+        
+        .mobile-nav-btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
         /* MOBILE FAB */
         .mobile-fab {
             display: none;
             position: fixed;
-            bottom: 20px;
+            bottom: 25px; /* Same level as navigation buttons */
             right: 20px;
             width: 56px;
             height: 56px;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
             color: var(--white);
             border: none;
             border-radius: 50%;
-            font-size: 1.5em;
+            font-size: 1.3em;
             cursor: pointer;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
             z-index: 1000;
             transition: var(--transition);
         }
         
         .mobile-fab:hover {
             transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(156, 39, 176, 0.5);
         }
         
         .mobile-menu {
@@ -388,6 +439,30 @@
             padding: 20px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .mobile-section-tabs {
+            display: flex;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .mobile-section-tab {
+            flex: 1;
+            padding: 12px 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .mobile-section-tab.active {
+            background: var(--primary-color);
+            color: var(--white);
         }
         
         /* RESPONSIVE */
@@ -415,25 +490,43 @@
                 justify-content: center;
             }
             
+            .mobile-navigation {
+                display: block;
+            }
+            
+            .navigation-buttons {
+                display: none;
+            }
+            
             .content-header {
-                padding: 15px 20px;
+                padding: 12px 20px;
             }
             
             .content-body {
-                padding: 20px;
+                padding: 20px 20px 40px 20px; /* Reduced bottom padding for floating buttons */
+            }
+            
+            .content-title h2 {
+                font-size: 1.3em;
+            }
+            
+            .content-subtitle {
+                font-size: 0.8em;
             }
         }
         
         @media (max-width: 768px) {
             .content-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+                padding: 10px 15px;
             }
             
-            .navigation-buttons {
-                width: 100%;
-                justify-content: space-between;
+            .content-body {
+                padding: 15px 15px 40px 15px;
+            }
+            
+            .content-title h2 {
+                font-size: 1.2em;
+                margin-bottom: 1px;
             }
         }
         
@@ -495,18 +588,35 @@
         </div>
         
         <!-- MOBILE FAB -->
-        <button class="mobile-fab" id="mobile-fab" onclick="toggleMobileMenu()">⚡</button>
+        <button class="mobile-fab" id="mobile-fab" onclick="toggleMobileMenu()">☰</button>
         
         <!-- MOBILE MENU -->
         <div class="mobile-menu" id="mobile-menu" onclick="closeMobileMenu()">
             <div class="mobile-menu-content" onclick="event.stopPropagation()">
                 <div class="mobile-menu-header">
-                    <h3>📚 Topics</h3>
+                    <h3>📚 English A2 Study Guide</h3>
+                    <button onclick="closeMobileMenu()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5em; cursor: pointer;">×</button>
                 </div>
+                
+                <!-- Mobile Section Tabs -->
+                <div class="mobile-section-tabs">
+                    <button class="mobile-section-tab active" onclick="showSectionMobile('grammar')">📖 Grammar</button>
+                    <button class="mobile-section-tab" onclick="showSectionMobile('vocabulary')">📝 Vocabulary</button>
+                    <button class="mobile-section-tab" onclick="showSectionMobile('verbs')">⚡ Verbs</button>
+                </div>
+                
                 <div class="topic-list" id="mobile-topic-list">
                     <!-- Mobile topics will be loaded here -->
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-navigation">
+        <div class="mobile-nav-buttons">
+            <button class="mobile-nav-btn" id="mobile-prev-btn" onclick="navigateTopic(-1)" title="Previous Topic">‹</button>
+            <button class="mobile-nav-btn" id="mobile-next-btn" onclick="navigateTopic(1)" title="Next Topic">›</button>
         </div>
     </div></body>
 
@@ -768,8 +878,21 @@
         function updateNavigationButtons() {
             if (!elements.prevBtn || !elements.nextBtn) return;
             
-            elements.prevBtn.disabled = currentTopicIndex <= 0;
-            elements.nextBtn.disabled = currentTopicIndex >= currentTopics.length - 1 || currentTopicIndex === -1;
+            const isDisabledPrev = currentTopicIndex <= 0;
+            const isDisabledNext = currentTopicIndex >= currentTopics.length - 1 || currentTopicIndex === -1;
+            
+            // Desktop buttons
+            elements.prevBtn.disabled = isDisabledPrev;
+            elements.nextBtn.disabled = isDisabledNext;
+            
+            // Mobile buttons
+            const mobilePrevBtn = document.getElementById('mobile-prev-btn');
+            const mobileNextBtn = document.getElementById('mobile-next-btn');
+            
+            if (mobilePrevBtn && mobileNextBtn) {
+                mobilePrevBtn.disabled = isDisabledPrev;
+                mobileNextBtn.disabled = isDisabledNext;
+            }
         }
         
         function showAnswer(button) {
@@ -788,6 +911,33 @@
                 const isVisible = topic.textContent.toLowerCase().includes(term);
                 topic.style.display = isVisible ? 'block' : 'none';
             });
+        }
+        
+        function showSectionMobile(sectionName) {
+            currentSection = sectionName;
+            
+            // Update mobile section tabs
+            document.querySelectorAll('.mobile-section-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update desktop sidebar tabs
+            document.querySelectorAll('.sidebar-tab').forEach((tab, index) => {
+                tab.classList.remove('active');
+                if ((sectionName === 'grammar' && index === 0) ||
+                    (sectionName === 'vocabulary' && index === 1) ||
+                    (sectionName === 'verbs' && index === 2)) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Load topics for this section
+            loadTopicList();
+            
+            // Clear current topic
+            currentTopicIndex = -1;
+            showWelcomeMessage();
         }
         
         function toggleMobileMenu() {
