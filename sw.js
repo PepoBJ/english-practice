@@ -1,8 +1,8 @@
 const CACHE_NAME = 'english-a2-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  '/english-practice/',
+  '/english-practice/index.html',
+  '/english-practice/manifest.json'
 ];
 
 // Install event - cache resources
