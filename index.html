@@ -639,6 +639,200 @@
         let currentSection = SECTIONS.GRAMMAR;
         let currentTopicIndex = -1;
         let currentTopics = [];
+        // Progress tracking
+        let studyProgress = {
+            grammar: new Set(),
+            vocabulary: new Set(),
+            verbs: new Set(['regular', 'irregular']), // Only 2 verb topics
+            writing: new Set()
+        };
+
+        // Last position tracking
+        let lastPosition = {
+            section: 'grammar',
+            topicIndex: -1,
+            topicTitle: null
+        };
+
+        function saveLastPosition() {
+            lastPosition.section = currentSection;
+            lastPosition.topicIndex = currentTopicIndex;
+            lastPosition.topicTitle = currentTopicIndex >= 0 ? (currentTopics[currentTopicIndex]?.title || currentTopics[currentTopicIndex]?.type) : null;
+            localStorage.setItem('englishA2LastPosition', JSON.stringify(lastPosition));
+        }
+
+        function loadLastPosition() {
+            const saved = localStorage.getItem('englishA2LastPosition');
+            if (saved) {
+                lastPosition = JSON.parse(saved);
+                return lastPosition;
+            }
+            return null;
+        }
+
+        function restoreLastPosition() {
+            const saved = loadLastPosition();
+            if (saved && saved.section && saved.topicTitle) {
+                // Switch to the saved section
+                currentSection = saved.section;
+                
+                // Update section tabs
+                document.querySelectorAll('.sidebar-tab').forEach((tab, index) => {
+                    tab.classList.remove('active');
+                    if ((saved.section === 'grammar' && index === 0) ||
+                        (saved.section === 'vocabulary' && index === 1) ||
+                        (saved.section === 'verbs' && index === 2) ||
+                        (saved.section === 'writing' && index === 3)) {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                // Load topics for this section
+                loadTopicList();
+                
+                // Find and select the saved topic
+                setTimeout(() => {
+                    const topicIndex = currentTopics.findIndex(topic => 
+                        (topic.title === saved.topicTitle) || (topic.type === saved.topicTitle)
+                    );
+                    
+                    if (topicIndex >= 0) {
+                        selectTopic(topicIndex);
+                    }
+                }, 200);
+            }
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('englishA2Progress');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                studyProgress.grammar = new Set(parsed.grammar || []);
+                studyProgress.vocabulary = new Set(parsed.vocabulary || []);
+                studyProgress.verbs = new Set(parsed.verbs || []);
+                studyProgress.writing = new Set(parsed.writing || []);
+            }
+        }
+
+        function saveProgress() {
+            const toSave = {
+                grammar: Array.from(studyProgress.grammar),
+                vocabulary: Array.from(studyProgress.vocabulary),
+                verbs: Array.from(studyProgress.verbs),
+                writing: Array.from(studyProgress.writing)
+            };
+            localStorage.setItem('englishA2Progress', JSON.stringify(toSave));
+        }
+
+        function markTopicAsViewed(section, topicTitle) {
+            if (studyProgress[section]) {
+                studyProgress[section].add(topicTitle);
+                saveProgress();
+                updateProgressDisplay();
+                updateMarkAsUnreadButton();
+            }
+        }
+
+        function markTopicAsUnread(section, topicTitle) {
+            if (studyProgress[section]) {
+                studyProgress[section].delete(topicTitle);
+                saveProgress();
+                updateProgressDisplay();
+                updateMarkAsUnreadButton();
+                // Force reload topic list to update sidebar immediately
+                loadTopicList();
+            }
+        }
+
+        function updateMarkAsUnreadButton() {
+            const currentTopic = currentTopics[currentTopicIndex];
+            if (!currentTopic) return;
+            
+            const topicTitle = currentTopic.title || currentTopic.type;
+            const isViewed = studyProgress[currentSection]?.has(topicTitle);
+            
+            // Remove existing button
+            const existingBtn = document.querySelector('.mark-unread-btn');
+            if (existingBtn) existingBtn.remove();
+            
+            if (isViewed) {
+                // Add unread button to content header
+                const contentHeader = document.querySelector('.content-header');
+                if (contentHeader) {
+                    const unreadBtn = document.createElement('button');
+                    unreadBtn.className = 'mark-unread-btn';
+                    unreadBtn.innerHTML = '↻ Mark as unread';
+                    unreadBtn.style.cssText = `
+                        background: #dc3545;
+                        color: white;
+                        border: none;
+                        padding: 6px 12px;
+                        border-radius: 4px;
+                        font-size: 0.8em;
+                        cursor: pointer;
+                        opacity: 0.8;
+                        transition: all 0.2s;
+                        margin-left: 10px;
+                    `;
+                    unreadBtn.onmouseover = () => {
+                        unreadBtn.style.opacity = '1';
+                        unreadBtn.style.transform = 'scale(1.05)';
+                    };
+                    unreadBtn.onmouseout = () => {
+                        unreadBtn.style.opacity = '0.8';
+                        unreadBtn.style.transform = 'scale(1)';
+                    };
+                    unreadBtn.onclick = () => markTopicAsUnread(currentSection, topicTitle);
+                    
+                    contentHeader.appendChild(unreadBtn);
+                }
+            }
+        }
+
+        function updateProgressDisplay() {
+            // Update sidebar progress indicators
+            document.querySelectorAll('.topic-item').forEach(item => {
+                // Get clean topic title without any existing checks
+                let cleanHTML = item.innerHTML;
+                cleanHTML = cleanHTML.replace(/<span[^>]*>✓<\/span>\s*/g, ''); // Remove existing check spans
+                cleanHTML = cleanHTML.replace(/^[✓✅]\s*/, ''); // Remove any remaining check marks
+                
+                const topicTitle = item.textContent.replace(/^[✓✅]\s*/, '').trim();
+                const isViewed = studyProgress[currentSection]?.has(topicTitle);
+                
+                // Reset item
+                item.innerHTML = cleanHTML;
+                item.style.opacity = '1';
+                
+                if (isViewed) {
+                    item.innerHTML = '<span style="color: #28a745; font-weight: bold;">✓</span> ' + cleanHTML;
+                    item.style.opacity = '0.8';
+                }
+            });
+            
+            // Update section tabs with progress
+            updateSectionProgress();
+        }
+
+        function updateSectionProgress() {
+            const sections = ['grammar', 'vocabulary', 'verbs', 'writing'];
+            const sectionTabs = document.querySelectorAll('.sidebar-tab');
+            
+            sections.forEach((section, index) => {
+                if (sectionTabs[index]) {
+                    const totalTopics = section === 'verbs' ? 2 : allTopics[section]?.length || 0;
+                    const viewedTopics = studyProgress[section]?.size || 0;
+                    const percentage = totalTopics > 0 ? Math.round((viewedTopics / totalTopics) * 100) : 0;
+                    
+                    // Add progress indicator to tab
+                    const tabText = sectionTabs[index].textContent.split(' (')[0]; // Remove existing progress
+                    if (percentage > 0) {
+                        sectionTabs[index].textContent = `${tabText} (${percentage}%)`;
+                    }
+                }
+            });
+        }
+
         let allTopics = {
             grammar: [],
             vocabulary: [],
@@ -719,6 +913,7 @@
             
             elements.topicList.innerHTML = topicHTML;
             elements.mobileTopicList.innerHTML = topicHTML;
+            updateProgressDisplay(); // Update progress indicators
         }
         
         function generateTopicHTML(topics, clickHandler) {
@@ -750,9 +945,16 @@
             
             const verbs = allTopics.verbs[type];
             const isRegular = type === VERB_TYPES.REGULAR;
+            const title = isRegular ? 'Regular Verbs' : 'Irregular Verbs';
             
-            elements.titleEl.textContent = isRegular ? 'Regular Verbs' : 'Irregular Verbs';
+            elements.titleEl.textContent = title;
             elements.subtitleEl.textContent = `${verbs.length} ${isRegular ? 'Regular' : 'Irregular'} Verbs with Examples`;
+            
+            // Mark verb table as viewed
+            markTopicAsViewed('verbs', type);
+            
+            // Save current position
+            saveLastPosition();
             
             let tableHTML = `
                 <div style="overflow-x: auto;">
@@ -813,6 +1015,9 @@
             
             elements.contentEl.innerHTML = tableHTML;
             scrollToTop();
+            
+            // Add unread button if needed
+            setTimeout(updateMarkAsUnreadButton, 100);
         }
         
         function updateActiveTopicUI(index, items = null) {
@@ -828,6 +1033,12 @@
             elements.titleEl.textContent = topic.title;
             elements.subtitleEl.textContent = `${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)} • Topic ${currentTopicIndex + 1} of ${currentTopics.length}`;
             
+            // Mark topic as viewed
+            markTopicAsViewed(currentSection, topic.title);
+            
+            // Save current position
+            saveLastPosition();
+            
             // For verbs section, handle differently
             if (currentSection === SECTIONS.VERBS && topic.type) {
                 showVerbTable(topic.type);
@@ -838,6 +1049,9 @@
             const contentHTML = createRegularContent(topic);
             elements.contentEl.innerHTML = contentHTML;
             scrollToTop();
+            
+            // Add unread button if needed
+            setTimeout(updateMarkAsUnreadButton, 100);
         }
         
         function createRegularContent(topic) {
@@ -936,6 +1150,9 @@
         function showSectionMobile(sectionName) {
             currentSection = sectionName;
             
+            // Save section change
+            saveLastPosition();
+            
             // Update mobile section tabs
             document.querySelectorAll('.mobile-section-tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -983,6 +1200,7 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             cacheElements();
+            loadProgress(); // Load saved progress
             loadGrammarTopics();
             loadVocabularyTopics();
             loadVerbTables();
@@ -996,6 +1214,10 @@
                 allTopics.writing = writingTopics || [];
                 
                 loadTopicList();
+                updateSectionProgress(); // Update progress display
+                
+                // Restore last position after everything is loaded
+                setTimeout(restoreLastPosition, 300);
             }, 100);
         });
     </script>
