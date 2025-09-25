@@ -44,6 +44,68 @@
             height: 100vh;
         }
         
+        /* LOADING SCREEN */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .loading-subtext {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Hide main content initially */
+        .app-container {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+        
+        .app-container.loaded {
+            opacity: 1;
+        }
+        
         /* SIDEBAR */
         .sidebar {
             width: 320px;
@@ -74,14 +136,33 @@
         
         .sidebar-tab {
             flex: 1;
-            padding: 12px 8px;
+            padding: 8px 4px;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-weight: bold;
             transition: var(--transition);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+        
+        .sidebar-tab .tab-icon {
+            font-size: 1.3em;
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-tab .tab-title {
+            margin-bottom: 1px;
+        }
+        
+        .sidebar-tab .tab-progress {
+            font-size: 0.7em;
+            opacity: 0.8;
+            font-weight: normal;
         }
         
         .sidebar-tab.active {
@@ -543,7 +624,16 @@
     </style>
 </head>
 <body>
-    <div class="app-container">
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">English A2 Study Guide</div>
+            <div class="loading-subtext">Loading your study session...</div>
+        </div>
+    </div>
+    
+    <div class="app-container" id="app-container">
         <!-- SIDEBAR -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -552,10 +642,26 @@
             </div>
             
             <div class="sidebar-tabs">
-                <button class="sidebar-tab active" onclick="showSection('grammar')">📝 Grammar</button>
-                <button class="sidebar-tab" onclick="showSection('vocabulary')">📖 Vocab</button>
-                <button class="sidebar-tab" onclick="showSection('verbs')">🔤 Verbs</button>
-                <button class="sidebar-tab" onclick="showSection('writing')">✍️ Writing</button>
+                <button class="sidebar-tab active" onclick="showSection('grammar')">
+                    <div class="tab-icon">📖</div>
+                    <div class="tab-title">Grammar</div>
+                    <div class="tab-progress" id="grammar-progress"></div>
+                </button>
+                <button class="sidebar-tab" onclick="showSection('vocabulary')">
+                    <div class="tab-icon">📝</div>
+                    <div class="tab-title">Vocab</div>
+                    <div class="tab-progress" id="vocabulary-progress"></div>
+                </button>
+                <button class="sidebar-tab" onclick="showSection('verbs')">
+                    <div class="tab-icon">⚡</div>
+                    <div class="tab-title">Verbs</div>
+                    <div class="tab-progress" id="verbs-progress"></div>
+                </button>
+                <button class="sidebar-tab" onclick="showSection('writing')">
+                    <div class="tab-icon">✍️</div>
+                    <div class="tab-title">Writing</div>
+                    <div class="tab-progress" id="writing-progress"></div>
+                </button>
             </div>
             
             <input type="text" class="search-box" placeholder="🔍 Search topics..." onkeyup="searchTopics(this.value)">
@@ -643,7 +749,7 @@
         let studyProgress = {
             grammar: new Set(),
             vocabulary: new Set(),
-            verbs: new Set(['regular', 'irregular']), // Only 2 verb topics
+            verbs: new Set(), // Remove hardcoded values
             writing: new Set()
         };
 
@@ -668,6 +774,24 @@
                 return lastPosition;
             }
             return null;
+        }
+
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const appContainer = document.getElementById('app-container');
+            
+            if (loadingScreen && appContainer) {
+                // Fade out loading screen
+                loadingScreen.classList.add('fade-out');
+                
+                // Show main app
+                appContainer.classList.add('loaded');
+                
+                // Remove loading screen from DOM after animation
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }
         }
 
         function restoreLastPosition() {
@@ -712,6 +836,8 @@
                 studyProgress.verbs = new Set(parsed.verbs || []);
                 studyProgress.writing = new Set(parsed.writing || []);
             }
+            // Force update progress display after loading
+            setTimeout(updateSectionProgress, 100);
         }
 
         function saveProgress() {
@@ -724,67 +850,131 @@
             localStorage.setItem('englishA2Progress', JSON.stringify(toSave));
         }
 
-        function markTopicAsViewed(section, topicTitle) {
+        function markTopicAsCompleted(section, topicTitle) {
             if (studyProgress[section]) {
                 studyProgress[section].add(topicTitle);
                 saveProgress();
                 updateProgressDisplay();
-                updateMarkAsUnreadButton();
+                updateCompletionButtons();
             }
         }
 
-        function markTopicAsUnread(section, topicTitle) {
+        function markTopicAsIncomplete(section, topicTitle) {
             if (studyProgress[section]) {
                 studyProgress[section].delete(topicTitle);
                 saveProgress();
                 updateProgressDisplay();
-                updateMarkAsUnreadButton();
-                // Force reload topic list to update sidebar immediately
-                loadTopicList();
+                updateCompletionButtons();
             }
         }
 
-        function updateMarkAsUnreadButton() {
+        function updateCompletionButtons() {
             const currentTopic = currentTopics[currentTopicIndex];
-            if (!currentTopic) return;
+            
+            // Remove existing buttons first
+            const existingBtns = document.querySelectorAll('.completion-btn, .incomplete-btn');
+            existingBtns.forEach(btn => btn.remove());
+            
+            // Only show buttons if we have a valid topic selected
+            if (!currentTopic || currentTopicIndex < 0) return;
             
             const topicTitle = currentTopic.title || currentTopic.type;
-            const isViewed = studyProgress[currentSection]?.has(topicTitle);
+            const isCompleted = studyProgress[currentSection]?.has(topicTitle);
             
-            // Remove existing button
-            const existingBtn = document.querySelector('.mark-unread-btn');
-            if (existingBtn) existingBtn.remove();
-            
-            if (isViewed) {
-                // Add unread button to content header
-                const contentHeader = document.querySelector('.content-header');
-                if (contentHeader) {
-                    const unreadBtn = document.createElement('button');
-                    unreadBtn.className = 'mark-unread-btn';
-                    unreadBtn.innerHTML = '↻ Mark as unread';
-                    unreadBtn.style.cssText = `
-                        background: #dc3545;
-                        color: white;
-                        border: none;
-                        padding: 6px 12px;
-                        border-radius: 4px;
+            // Add completion tags to content header
+            const contentHeader = document.querySelector('.content-header');
+            if (contentHeader) {
+                if (isCompleted) {
+                    // Show completed tag with label above and button below
+                    const completedContainer = document.createElement('div');
+                    completedContainer.style.cssText = `
+                        display: inline-flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin-left: 12px;
+                        vertical-align: middle;
+                    `;
+                    
+                    const completedTag = document.createElement('span');
+                    completedTag.className = 'completion-btn';
+                    completedTag.innerHTML = '✓ Completed';
+                    completedTag.style.cssText = `
+                        background: #d4edda;
+                        color: #155724;
+                        border: 1px solid #c3e6cb;
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                        font-size: 0.65em;
+                        font-weight: 500;
+                        display: block;
+                        margin-bottom: 4px;
+                    `;
+                    
+                    const incompleteBtn = document.createElement('button');
+                    incompleteBtn.className = 'incomplete-btn';
+                    incompleteBtn.innerHTML = 'Mark as Incomplete';
+                    incompleteBtn.title = 'Mark as incomplete';
+                    incompleteBtn.style.cssText = `
+                        background: #f8d7da;
+                        color: #721c24;
+                        border: 1px solid #f5c6cb;
+                        padding: 4px 12px;
+                        border-radius: 16px;
+                        font-size: 0.75em;
+                        cursor: pointer;
+                        font-weight: 500;
+                        transition: all 0.2s;
+                        white-space: nowrap;
+                    `;
+                    incompleteBtn.onmouseover = () => {
+                        incompleteBtn.style.background = '#dc3545';
+                        incompleteBtn.style.color = 'white';
+                        incompleteBtn.style.transform = 'scale(1.05)';
+                    };
+                    incompleteBtn.onmouseout = () => {
+                        incompleteBtn.style.background = '#f8d7da';
+                        incompleteBtn.style.color = '#721c24';
+                        incompleteBtn.style.transform = 'scale(1)';
+                    };
+                    incompleteBtn.onclick = () => markTopicAsIncomplete(currentSection, topicTitle);
+                    
+                    completedContainer.appendChild(completedTag);
+                    completedContainer.appendChild(incompleteBtn);
+                    contentHeader.appendChild(completedContainer);
+                } else {
+                    // Show mark as complete tag-button
+                    const completeBtn = document.createElement('button');
+                    completeBtn.className = 'completion-btn';
+                    completeBtn.innerHTML = '✓ Mark as Complete';
+                    completeBtn.style.cssText = `
+                        background: #cce5ff;
+                        color: #004085;
+                        border: 1px solid #99d3ff;
+                        padding: 4px 12px;
+                        border-radius: 20px;
                         font-size: 0.8em;
                         cursor: pointer;
-                        opacity: 0.8;
+                        font-weight: 500;
                         transition: all 0.2s;
-                        margin-left: 10px;
+                        margin-left: 12px;
+                        display: inline-block;
+                        vertical-align: middle;
                     `;
-                    unreadBtn.onmouseover = () => {
-                        unreadBtn.style.opacity = '1';
-                        unreadBtn.style.transform = 'scale(1.05)';
+                    completeBtn.onmouseover = () => {
+                        completeBtn.style.background = '#007bff';
+                        completeBtn.style.color = 'white';
+                        completeBtn.style.transform = 'translateY(-1px)';
+                        completeBtn.style.boxShadow = '0 2px 4px rgba(0,123,255,0.3)';
                     };
-                    unreadBtn.onmouseout = () => {
-                        unreadBtn.style.opacity = '0.8';
-                        unreadBtn.style.transform = 'scale(1)';
+                    completeBtn.onmouseout = () => {
+                        completeBtn.style.background = '#cce5ff';
+                        completeBtn.style.color = '#004085';
+                        completeBtn.style.transform = 'translateY(0)';
+                        completeBtn.style.boxShadow = 'none';
                     };
-                    unreadBtn.onclick = () => markTopicAsUnread(currentSection, topicTitle);
+                    completeBtn.onclick = () => markTopicAsCompleted(currentSection, topicTitle);
                     
-                    contentHeader.appendChild(unreadBtn);
+                    contentHeader.appendChild(completeBtn);
                 }
             }
         }
@@ -798,13 +988,13 @@
                 cleanHTML = cleanHTML.replace(/^[✓✅]\s*/, ''); // Remove any remaining check marks
                 
                 const topicTitle = item.textContent.replace(/^[✓✅]\s*/, '').trim();
-                const isViewed = studyProgress[currentSection]?.has(topicTitle);
+                const isCompleted = studyProgress[currentSection]?.has(topicTitle);
                 
                 // Reset item
                 item.innerHTML = cleanHTML;
                 item.style.opacity = '1';
                 
-                if (isViewed) {
+                if (isCompleted) {
                     item.innerHTML = '<span style="color: #28a745; font-weight: bold;">✓</span> ' + cleanHTML;
                     item.style.opacity = '0.8';
                 }
@@ -816,18 +1006,19 @@
 
         function updateSectionProgress() {
             const sections = ['grammar', 'vocabulary', 'verbs', 'writing'];
-            const sectionTabs = document.querySelectorAll('.sidebar-tab');
             
-            sections.forEach((section, index) => {
-                if (sectionTabs[index]) {
-                    const totalTopics = section === 'verbs' ? 2 : allTopics[section]?.length || 0;
-                    const viewedTopics = studyProgress[section]?.size || 0;
-                    const percentage = totalTopics > 0 ? Math.round((viewedTopics / totalTopics) * 100) : 0;
-                    
-                    // Add progress indicator to tab
-                    const tabText = sectionTabs[index].textContent.split(' (')[0]; // Remove existing progress
+            sections.forEach((section) => {
+                const totalTopics = section === 'verbs' ? 2 : allTopics[section]?.length || 0;
+                const completedTopics = studyProgress[section]?.size || 0;
+                const percentage = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+                
+                // Update progress in sidebar tab
+                const progressElement = document.getElementById(`${section}-progress`);
+                if (progressElement) {
                     if (percentage > 0) {
-                        sectionTabs[index].textContent = `${tabText} (${percentage}%)`;
+                        progressElement.textContent = `${percentage}%`;
+                    } else {
+                        progressElement.textContent = '';
                     }
                 }
             });
@@ -866,11 +1057,16 @@
         function showSection(sectionName) {
             currentSection = sectionName;
             
-            // Update sidebar tabs
+            // Update sidebar tabs - find the correct tab by section name
             document.querySelectorAll('.sidebar-tab').forEach(tab => {
                 tab.classList.remove('active');
+                
+                // Check if this tab corresponds to the current section
+                const tabOnclick = tab.getAttribute('onclick');
+                if (tabOnclick && tabOnclick.includes(`'${sectionName}'`)) {
+                    tab.classList.add('active');
+                }
             });
-            event.target.classList.add('active');
             
             loadTopicList();
             currentTopicIndex = -1;
@@ -950,10 +1146,7 @@
             elements.titleEl.textContent = title;
             elements.subtitleEl.textContent = `${verbs.length} ${isRegular ? 'Regular' : 'Irregular'} Verbs with Examples`;
             
-            // Mark verb table as viewed
-            markTopicAsViewed('verbs', type);
-            
-            // Save current position
+            // Save current position (but don't mark as completed automatically)
             saveLastPosition();
             
             let tableHTML = `
@@ -1016,8 +1209,8 @@
             elements.contentEl.innerHTML = tableHTML;
             scrollToTop();
             
-            // Add unread button if needed
-            setTimeout(updateMarkAsUnreadButton, 100);
+            // Add completion button
+            setTimeout(updateCompletionButtons, 100);
         }
         
         function updateActiveTopicUI(index, items = null) {
@@ -1033,10 +1226,7 @@
             elements.titleEl.textContent = topic.title;
             elements.subtitleEl.textContent = `${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)} • Topic ${currentTopicIndex + 1} of ${currentTopics.length}`;
             
-            // Mark topic as viewed
-            markTopicAsViewed(currentSection, topic.title);
-            
-            // Save current position
+            // Save current position (but don't mark as completed automatically)
             saveLastPosition();
             
             // For verbs section, handle differently
@@ -1050,8 +1240,8 @@
             elements.contentEl.innerHTML = contentHTML;
             scrollToTop();
             
-            // Add unread button if needed
-            setTimeout(updateMarkAsUnreadButton, 100);
+            // Add completion button
+            setTimeout(updateCompletionButtons, 100);
         }
         
         function createRegularContent(topic) {
@@ -1100,6 +1290,10 @@
             `;
             updateNavigationButtons();
             scrollToTop();
+            
+            // Remove completion buttons when showing welcome message
+            const existingBtns = document.querySelectorAll('.completion-btn, .incomplete-btn');
+            existingBtns.forEach(btn => btn.remove());
         }
         
         function navigateTopic(direction) {
@@ -1112,6 +1306,32 @@
         function updateNavigationButtons() {
             if (!elements.prevBtn || !elements.nextBtn) return;
             
+            // Hide buttons if no topic is selected
+            if (currentTopicIndex < 0 || !currentTopics || currentTopics.length === 0) {
+                elements.prevBtn.style.display = 'none';
+                elements.nextBtn.style.display = 'none';
+                
+                // Also hide mobile buttons
+                const mobilePrevBtn = document.getElementById('mobile-prev-btn');
+                const mobileNextBtn = document.getElementById('mobile-next-btn');
+                if (mobilePrevBtn && mobileNextBtn) {
+                    mobilePrevBtn.style.display = 'none';
+                    mobileNextBtn.style.display = 'none';
+                }
+                return;
+            }
+            
+            // Show buttons when topic is selected
+            elements.prevBtn.style.display = 'flex';
+            elements.nextBtn.style.display = 'flex';
+            
+            const mobilePrevBtn = document.getElementById('mobile-prev-btn');
+            const mobileNextBtn = document.getElementById('mobile-next-btn');
+            if (mobilePrevBtn && mobileNextBtn) {
+                mobilePrevBtn.style.display = 'flex';
+                mobileNextBtn.style.display = 'flex';
+            }
+            
             const isDisabledPrev = currentTopicIndex <= 0;
             const isDisabledNext = currentTopicIndex >= currentTopics.length - 1 || currentTopicIndex === -1;
             
@@ -1120,9 +1340,6 @@
             elements.nextBtn.disabled = isDisabledNext;
             
             // Mobile buttons
-            const mobilePrevBtn = document.getElementById('mobile-prev-btn');
-            const mobileNextBtn = document.getElementById('mobile-next-btn');
-            
             if (mobilePrevBtn && mobileNextBtn) {
                 mobilePrevBtn.disabled = isDisabledPrev;
                 mobileNextBtn.disabled = isDisabledNext;
@@ -1217,7 +1434,12 @@
                 updateSectionProgress(); // Update progress display
                 
                 // Restore last position after everything is loaded
-                setTimeout(restoreLastPosition, 300);
+                setTimeout(() => {
+                    restoreLastPosition();
+                    
+                    // Hide loading screen after restoration is complete
+                    setTimeout(hideLoadingScreen, 200);
+                }, 300);
             }, 100);
         });
     </script>
