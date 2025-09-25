@@ -587,8 +587,15 @@
                     break;
                     
                 case SECTIONS.VERBS:
-                    topicHTML = generateVerbsHTML();
-                    currentTopics = [...allTopics.verbs.regular, ...allTopics.verbs.irregular];
+                    // Only show 2 options: Regular and Irregular verbs
+                    topicHTML = `
+                        <div class="topic-item" onclick="selectVerbTable('regular')">📋 Regular Verbs (${allTopics.verbs.regular.length})</div>
+                        <div class="topic-item" onclick="selectVerbTable('irregular')">⚡ Irregular Verbs (${allTopics.verbs.irregular.length})</div>
+                    `;
+                    currentTopics = [
+                        { title: 'Regular Verbs', type: 'regular' },
+                        { title: 'Irregular Verbs', type: 'irregular' }
+                    ];
                     break;
             }
             
@@ -602,22 +609,6 @@
             ).join('');
         }
         
-        function generateVerbsHTML() {
-            let html = '<div style="padding: 10px 20px; background: #e3f2fd; font-weight: bold; color: #1976d2;">📋 Regular Verbs</div>';
-            
-            allTopics.verbs.regular.forEach((verb, index) => {
-                html += `<div class="topic-item" onclick="selectVerbTopic('${VERB_TYPES.REGULAR}', ${index})">${verb.title}</div>`;
-            });
-            
-            html += '<div style="padding: 10px 20px; background: #fce4ec; font-weight: bold; color: #c2185b; margin-top: 10px;">⚡ Irregular Verbs</div>';
-            
-            allTopics.verbs.irregular.forEach((verb, index) => {
-                html += `<div class="topic-item" onclick="selectVerbTopic('${VERB_TYPES.IRREGULAR}', ${index})">${verb.title}</div>`;
-            });
-            
-            return html;
-        }
-        
         function selectTopic(index) {
             currentTopicIndex = index;
             updateActiveTopicUI(index);
@@ -626,20 +617,83 @@
             closeMobileMenu();
         }
         
-        function selectVerbTopic(type, index) {
-            const verb = allTopics.verbs[type][index];
-            const globalIndex = type === VERB_TYPES.REGULAR ? index : allTopics.verbs.regular.length + index;
+        function selectVerbTable(type) {
+            const index = type === VERB_TYPES.REGULAR ? 0 : 1;
+            currentTopicIndex = index;
             
-            currentTopicIndex = globalIndex;
-            
-            // Update active topic in sidebar
-            const allItems = document.querySelectorAll('.topic-item');
-            const targetIndex = type === VERB_TYPES.REGULAR ? index + 1 : allTopics.verbs.regular.length + index + 2;
-            
-            updateActiveTopicUI(targetIndex, allItems);
-            showTopicContent(verb);
+            updateActiveTopicUI(index);
+            showVerbTable(type);
             updateNavigationButtons();
             closeMobileMenu();
+        }
+        
+        function showVerbTable(type) {
+            if (!elements.titleEl || !elements.subtitleEl || !elements.contentEl) return;
+            
+            const verbs = allTopics.verbs[type];
+            const isRegular = type === VERB_TYPES.REGULAR;
+            
+            elements.titleEl.textContent = isRegular ? 'Regular Verbs' : 'Irregular Verbs';
+            elements.subtitleEl.textContent = `${verbs.length} ${isRegular ? 'Regular' : 'Irregular'} Verbs with Examples`;
+            
+            let tableHTML = `
+                <div style="overflow-x: auto;">
+                    <table class="verb-table">
+                        <thead>
+                            <tr>
+                                <th>Base Form</th>
+                                <th>Past Simple</th>
+                                <th>Past Participle</th>
+                                <th>Spanish</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            verbs.forEach(verb => {
+                tableHTML += `
+                    <tr>
+                        <td><strong>${verb.base}</strong></td>
+                        <td>${verb.past}</td>
+                        <td>${verb.participle}</td>
+                        <td><em>${verb.spanish}</em></td>
+                        <td>${verb.examples.join('<br>• ')}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            // Add tips section
+            if (isRegular) {
+                tableHTML += `
+                    <div class="tips">
+                        <strong>📝 Regular Verbs Rules:</strong><br>
+                        • Most verbs: add -ED (work → worked)<br>
+                        • Verbs ending in -E: add -D (live → lived)<br>
+                        • Verbs ending in consonant + Y: change Y to -IED (study → studied)<br>
+                        • One syllable verbs ending in consonant-vowel-consonant: double the consonant (stop → stopped)
+                    </div>
+                `;
+            } else {
+                tableHTML += `
+                    <div class="tips">
+                        <strong>🎯 Irregular Verbs Tips:</strong><br>
+                        • Learn in groups with same patterns (sing-sang-sung, ring-rang-rung)<br>
+                        • Practice daily: 5-10 verbs per day<br>
+                        • Use flashcards for memorization<br>
+                        • Focus on the most common ones first<br>
+                        • Make sentences with each verb form
+                    </div>
+                `;
+            }
+            
+            elements.contentEl.innerHTML = tableHTML;
         }
         
         function updateActiveTopicUI(index, items = null) {
@@ -655,25 +709,14 @@
             elements.titleEl.textContent = topic.title;
             elements.subtitleEl.textContent = `${currentSection.charAt(0).toUpperCase() + currentSection.slice(1)} • Topic ${currentTopicIndex + 1} of ${currentTopics.length}`;
             
-            const contentHTML = currentSection === SECTIONS.VERBS 
-                ? createVerbContent(topic) 
-                : createRegularContent(topic);
+            // For verbs section, handle differently
+            if (currentSection === SECTIONS.VERBS && topic.type) {
+                showVerbTable(topic.type);
+                return;
+            }
             
+            const contentHTML = createRegularContent(topic);
             elements.contentEl.innerHTML = contentHTML;
-        }
-        
-        function createVerbContent(verb) {
-            return `
-                <div class="definition">
-                    <strong>Base Form:</strong> ${verb.base}<br>
-                    <strong>Past Simple:</strong> ${verb.past}<br>
-                    <strong>Past Participle:</strong> ${verb.participle}<br>
-                    <strong>Spanish:</strong> ${verb.spanish}
-                </div>
-                <div class="examples">
-                    ${verb.examples.map(example => `• ${example}`).join('<br>')}
-                </div>
-            `;
         }
         
         function createRegularContent(topic) {
