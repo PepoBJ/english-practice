@@ -7,8 +7,8 @@ const testContent = {
                     id: 1,
                     question: "It's _____ useful machine.",
                     options: ["∅", "an", "a", "my"],
-                    correct: 1,
-                    explanation: "Use 'an' before words starting with vowel sounds."
+                    correct: 2,
+                    explanation: "Use 'a' before words starting with consonant sounds. 'Useful' starts with /j/ sound."
                 },
                 {
                     id: 2,

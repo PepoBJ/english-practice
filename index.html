@@ -955,6 +955,39 @@
             color: #c62828;
         }
         
+        .test-question.unanswered {
+            border: 2px solid #ff9800;
+            background: #fff3e0;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .test-message {
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-message.warning {
+            border-color: #ff9800;
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .test-message.info {
+            border-color: #2196f3;
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1968,7 +2001,7 @@
                             <div class="question-options">
                                 ${question.options.map((option, optionIndex) => `
                                     <label class="option-label">
-                                        <input type="radio" name="q${questionNumber}" value="${optionIndex}" onchange="updateTestProgress()">
+                                        <input type="radio" name="q${questionNumber}" value="${optionIndex}" onchange="updateTestProgress(); clearQuestionHighlight(${questionNumber})">
                                         <span class="option-text">${option}</span>
                                         <button onclick="speakText('${option.replace(/'/g, "\\'")}')" style="background: #e8f5e8; color: #2e7d32; border: 1px solid #c8e6c9; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 0.7em; margin-left: 4px;">🔊</button>
                                     </label>
@@ -2009,7 +2042,23 @@
             const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
             
             if (answeredQuestions < totalQuestions) {
-                alert(`Please answer all questions. You have answered ${answeredQuestions} out of ${totalQuestions} questions.`);
+                const unanswered = totalQuestions - answeredQuestions;
+                
+                // Highlight unanswered questions
+                highlightUnansweredQuestions();
+                
+                // Show friendly message
+                const message = unanswered === 1 ? 
+                    "Please answer the highlighted question before submitting." :
+                    `Please answer the ${unanswered} highlighted questions before submitting.`;
+                
+                showTestMessage(message, 'warning');
+                
+                // Scroll to first unanswered question
+                const firstUnanswered = document.querySelector('.test-question.unanswered');
+                if (firstUnanswered) {
+                    firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
             
@@ -2040,6 +2089,58 @@
             
             const percentage = Math.round((score / totalQuestions) * 100);
             showTestResults(score, totalQuestions, percentage, results);
+        }
+        
+        function highlightUnansweredQuestions() {
+            // Remove previous highlights
+            document.querySelectorAll('.test-question').forEach(q => {
+                q.classList.remove('unanswered');
+            });
+            
+            // Add highlight to unanswered questions
+            let questionNumber = 1;
+            testContent.sections.forEach((section) => {
+                section.questions.forEach(() => {
+                    const answered = document.querySelector(`input[name="q${questionNumber}"]:checked`);
+                    if (!answered) {
+                        const questionDiv = document.querySelector(`[data-question="${questionNumber-1}"]`);
+                        if (questionDiv) {
+                            questionDiv.classList.add('unanswered');
+                        }
+                    }
+                    questionNumber++;
+                });
+            });
+        }
+        
+        function showTestMessage(message, type = 'info') {
+            // Remove existing message
+            const existingMessage = document.querySelector('.test-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create new message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `test-message ${type}`;
+            messageDiv.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.2em;">${type === 'warning' ? '⚠️' : 'ℹ️'}</span>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="margin-left: auto; background: none; border: none; font-size: 1.2em; cursor: pointer; opacity: 0.7;">✕</button>
+                </div>
+            `;
+            
+            // Insert before test actions
+            const testActions = document.querySelector('.test-actions');
+            testActions.parentNode.insertBefore(messageDiv, testActions);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
         }
         
         function showTestResults(score, total, percentage, results) {
@@ -2098,6 +2199,13 @@
             resultsDiv.innerHTML = html;
             resultsDiv.style.display = 'block';
             resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function clearQuestionHighlight(questionNumber) {
+            const questionDiv = document.querySelector(`[data-question="${questionNumber-1}"]`);
+            if (questionDiv) {
+                questionDiv.classList.remove('unanswered');
+            }
         }
         
         function resetTest() {
@@ -2256,16 +2364,32 @@
             }, 100);
         });
         
-        // Register Service Worker for PWA (only on HTTP/HTTPS)
+        // Auto-update PWA in background
         if ('serviceWorker' in navigator && (location.protocol === 'http:' || location.protocol === 'https:')) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/english-practice/sw.js')
                     .then(registration => {
                         console.log('SW registered: ', registration);
+                        
+                        // Auto-update when new version is available
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Auto-activate new version
+                                    newWorker.postMessage({ action: 'skipWaiting' });
+                                }
+                            });
+                        });
                     })
                     .catch(registrationError => {
                         console.log('SW registration failed: ', registrationError);
                     });
+                    
+                // Auto-reload when service worker updates
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    window.location.reload();
+                });
             });
         } else if (location.protocol === 'file:') {
             console.log('Service Worker not registered: PWA features require HTTP/HTTPS protocol');

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'english-a2-v1';
+const CACHE_NAME = 'english-a2-v2'; // Increment version for updates
 const urlsToCache = [
   '/english-practice/',
   '/english-practice/index.html',
@@ -12,6 +12,10 @@ self.addEventListener('install', event => {
       .then(cache => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
+      })
+      .then(() => {
+        // Force the waiting service worker to become the active service worker
+        return self.skipWaiting();
       })
   );
 });
@@ -31,7 +35,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and take control
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -43,6 +47,23 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      // Take control of all pages immediately
+      return self.clients.claim();
+    }).then(() => {
+      // Notify all clients to refresh
+      return self.clients.matchAll().then(clients => {
+        clients.forEach(client => {
+          client.postMessage({ type: 'REFRESH' });
+        });
+      });
     })
   );
+});
+
+// Listen for skip waiting message
+self.addEventListener('message', event => {
+  if (event.data && event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
 });
