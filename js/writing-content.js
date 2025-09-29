@@ -4,425 +4,510 @@ function loadWritingTopics() {
     writingTopics = [
         {
             title: "ACCIDENT",
-            definition: "Describe a minor accident that you had in the past.",
+            definition: "Describe a small accident that happened to you.",
             structure: `
                 <strong>You should say:</strong><br>
                 • How the accident happened<br>
                 • What you did about it<br>
-                • How long you took to recover<br>
-                • and explain how you felt about the accident
+                • How long it took to get better<br>
+                • How you felt about it
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                Last year, I had a minor accident while I was working from home in Abancay. I was carrying my laptop to another room when I tripped over one of Ethan's toys on the floor. I fell down and hurt my wrist quite badly.<br><br>
+                Last month, I had a small accident at home. I was walking in the kitchen when I fell down. There was water on the floor and I didn't see it. I hurt my arm when I fell.<br><br>
                 
-                Immediately after the accident, I put ice on my wrist to reduce the swelling. Neli helped me bandage it, and we decided to go to the local clinic the next day. The doctor said it was just a sprain, not a fracture, which was a relief.<br><br>
+                After the accident, I put some ice on my arm. It was very painful. My mother helped me and we went to see a doctor. The doctor said my arm was okay, but I needed to be careful.<br><br>
                 
-                It took about two weeks for my wrist to recover completely. During this time, I had to be careful when typing for my work at Globant, especially when working on the Disney project. I had to take frequent breaks and use my left hand more than usual.<br><br>
+                It took about one week for my arm to feel better. During this time, I couldn't write very well at school. I had to use my other hand for some things.<br><br>
                 
-                I felt quite frustrated at first because the accident happened due to my carelessness. However, it taught me to be more careful around the house, especially with two young children. Now I always make sure to put away Ethan's toys after he plays, and I'm more aware of my surroundings when walking around the house.
+                I felt scared at first because it hurt a lot. But I learned to be more careful when I walk. Now I always look at the floor before I walk, especially in the kitchen. I don't want to have another accident like this.
             `,
             exercises: [
-                { question: "What caused your accident?", answer: "I tripped over my son's toy while carrying my laptop" },
-                { question: "What was your immediate reaction?", answer: "I put ice on my wrist and my wife helped bandage it" },
-                { question: "How long did it take to recover?", answer: "About two weeks to recover completely" },
-                { question: "What did you learn from this experience?", answer: "To be more careful and keep toys organized" },
-                { question: "How did it affect your work?", answer: "I had to take breaks and be careful when typing" }
+                { question: "Where did the accident happen?", answer: "In the kitchen at home" },
+                { question: "Why did the person fall?", answer: "There was water on the floor" },
+                { question: "What part of the body was hurt?", answer: "The arm" },
+                { question: "How long did it take to feel better?", answer: "About one week" },
+                { question: "What did the person learn?", answer: "To be more careful when walking" }
             ]
         },
         {
             title: "AMBITION",
-            definition: "Describe an ambition you have for the future.",
+            definition: "Describe something you want to do in the future.",
             structure: `
                 <strong>You should say:</strong><br>
-                • What this ambition is<br>
-                • When you expect to achieve it<br>
-                • How it will change your life in the future<br>
-                • and explain why this ambition is important to you
+                • What you want to do<br>
+                • When you want to do it<br>
+                • How it will change your life<br>
+                • Why it is important to you
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                My biggest ambition for the future is to become a Senior Data Engineering Manager at a major technology company, possibly leading international projects like the Disney project I currently work on at Globant.<br><br>
+                My biggest dream for the future is to become a teacher. I want to teach English to young children. I think teaching is a very good job because you can help people learn new things.<br><br>
                 
-                I expect to achieve this goal within the next 5 to 7 years. I'm currently 30 years old and have been building my experience in data engineering. I plan to continue developing my technical skills while also improving my leadership and management abilities.<br><br>
+                I want to finish my studies in about three years. After that, I will look for a job at a school. I hope to start working as a teacher when I am 25 years old.<br><br>
                 
-                Achieving this ambition will significantly change my life. Financially, it will provide better stability for my family - Neli, Ethan, and Anne. We could afford a bigger house in Abancay or even consider moving to Lima for better opportunities. It would also allow me to travel more for work, gaining international experience.<br><br>
+                If I become a teacher, my life will be very different. I will have a good job and I can help my family. I will also meet many children and their parents. I think I will be very happy.<br><br>
                 
-                This ambition is important to me because I want to provide the best possible future for my children. As a father of two young kids, I feel responsible for ensuring they have access to good education and opportunities. Additionally, I'm passionate about data engineering and want to make a meaningful impact in the technology industry, especially in projects that reach millions of people worldwide like Disney's platforms.
+                This dream is important to me because I love children and I want to help them. When I was young, my teachers helped me a lot. Now I want to do the same for other children. Teaching is not just a job for me - it is something I really want to do.
             `,
             exercises: [
-                { question: "What is your main ambition?", answer: "To become a Senior Data Engineering Manager" },
-                { question: "When do you plan to achieve it?", answer: "Within the next 5 to 7 years" },
-                { question: "How will it change your life?", answer: "Better financial stability and opportunities for my family" },
-                { question: "Why is this important to you?", answer: "To provide for my children and make an impact in technology" },
-                { question: "What steps are you taking?", answer: "Developing technical skills and leadership abilities" }
+                { question: "What does the person want to become?", answer: "A teacher" },
+                { question: "What subject does she want to teach?", answer: "English" },
+                { question: "When does she want to start working?", answer: "When she is 25 years old" },
+                { question: "Why does she want to be a teacher?", answer: "She loves children and wants to help them" },
+                { question: "How will it change her life?", answer: "She will have a good job and help her family" }
             ]
         },
         {
             title: "ANIMAL/PET",
-            definition: "Talk about a pet that you once had.",
+            definition: "Talk about a pet that you had or know.",
             structure: `
                 <strong>You should say:</strong><br>
                 • What kind of animal it was<br>
-                • What kind of care it needed<br>
-                • What you liked/didn't like about it<br>
-                • and say whether it is a popular pet to own or not and why
+                • What it looked like<br>
+                • How you took care of it<br>
+                • Why you liked or didn't like it
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                When I was younger, before I got married to Neli, I had a small dog named Rocky. He was a mixed breed, part terrier and part something else we never figured out. He was brown and white with very expressive eyes.<br><br>
+                When I was a child, I had a small dog called Max. He was a brown and white dog with short hair. He was not very big, but he was very friendly and happy all the time.<br><br>
                 
-                Rocky needed quite a bit of care. I had to walk him twice a day, feed him regularly, and make sure he had fresh water. Living in Abancay, he also needed protection from the mountain cold during winter months. I had to brush his fur regularly and take him to the vet for vaccinations.<br><br>
+                I took care of Max every day. I gave him food in the morning and evening. I also gave him water and took him for walks in the park. Sometimes I played with him in the garden.<br><br>
                 
-                What I loved most about Rocky was his loyalty and playful nature. He would always greet me enthusiastically when I came home from work. However, what I didn't like was that he would sometimes bark at night, disturbing the neighbors. He also had a habit of chewing my shoes when he was bored.<br><br>
+                I really loved Max because he was always happy to see me. When I came home from school, he ran to me and jumped up and down. He was like my best friend. But sometimes he was noisy and woke up the neighbors.<br><br>
                 
-                Dogs are very popular pets in Peru, especially in smaller cities like Abancay. Many families have dogs for companionship and security. They're considered part of the family. Now that I have two young children, Ethan and Anne, I'm considering getting another dog when they're a bit older, as pets can teach children responsibility and provide them with a loyal companion.
+                Dogs are very popular pets in my country. Many families have dogs because they are good friends and they can protect the house. I think dogs are the best pets because they love their families very much. I want to have another dog in the future.
             `,
             exercises: [
-                { question: "What kind of pet did you have?", answer: "A mixed breed dog named Rocky" },
-                { question: "What care did it need?", answer: "Daily walks, regular feeding, grooming, and vet visits" },
-                { question: "What did you like about it?", answer: "His loyalty and playful nature" },
-                { question: "What didn't you like?", answer: "He barked at night and chewed shoes" },
-                { question: "Are dogs popular pets in your area?", answer: "Yes, very popular in Peru for companionship and security" }
+                { question: "What was the dog's name?", answer: "Max" },
+                { question: "What did the dog look like?", answer: "Brown and white with short hair, not very big" },
+                { question: "How did the person take care of the dog?", answer: "Gave food and water, took for walks, played with him" },
+                { question: "What did the dog do when the person came home?", answer: "Ran to him and jumped up and down" },
+                { question: "Why are dogs popular pets?", answer: "They are good friends and can protect the house" }
             ]
         },
         {
             title: "APARTMENT/HOUSE",
-            definition: "Describe a house/apartment you have lived in.",
+            definition: "Describe a house or apartment where you lived.",
             structure: `
                 <strong>You should say:</strong><br>
-                • Why you liked living there<br>
-                • When you lived there<br>
-                • How it looked inside<br>
-                • and explain what kind of area it was in
+                • What it looked like<br>
+                • Where it was<br>
+                • Who lived there with you<br>
+                • What you liked about living there
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                I currently live in a comfortable house in Abancay, Apurímac, Peru, where I've been living with my wife Neli and our two children, Ethan and Anne, for the past three years.<br><br>
+                I lived in a small house with my family for many years. The house had two floors and four rooms. On the first floor, there was a kitchen, a living room, and a small bathroom. On the second floor, there were two bedrooms.<br><br>
                 
-                I really like living here because it's spacious enough for our growing family and has a quiet environment perfect for working from home. Since I work as a data engineer for Globant on the Disney project, I need a peaceful space for video calls and concentrated work. The house also has a small garden where Ethan can play safely.<br><br>
+                The house was in a quiet street near the center of town. There were many trees around the house and a small garden in front. The neighbors were very friendly and we knew all of them.<br><br>
                 
-                Inside, our house has three bedrooms, a living room, a kitchen, and two bathrooms. The living room is where we spend most of our family time, with comfortable sofas and a TV. My home office is in one of the bedrooms, equipped with my computer setup for work. The kitchen is modern and well-equipped, which Neli appreciates for preparing meals for our family.<br><br>
+                I lived there with my parents and my younger brother. We were very happy in that house. My brother and I shared one bedroom, and my parents had the other bedroom.<br><br>
                 
-                Our house is located in a residential area of Abancay, surrounded by the beautiful Andes mountains. It's a safe, family-friendly neighborhood with other young families. The area is quiet but not isolated - we have access to schools, markets, and healthcare facilities within a reasonable distance. The mountain views are spectacular, and the climate is generally pleasant year-round, which makes it an ideal place to raise our children.
+                I loved living in that house because it was comfortable and peaceful. The garden was beautiful and I liked to sit there and read books. The house was also near my school, so I could walk there every day. It was a perfect place for a family like ours.
             `,
             exercises: [
-                { question: "Where do you currently live?", answer: "In a house in Abancay, Apurímac, Peru" },
-                { question: "Why do you like living there?", answer: "It's spacious, quiet for work, and has a garden for my son" },
-                { question: "How many rooms does it have?", answer: "Three bedrooms, living room, kitchen, and two bathrooms" },
-                { question: "What kind of area is it?", answer: "A safe residential area surrounded by mountains" },
-                { question: "How long have you lived there?", answer: "For the past three years with my family" }
+                { question: "How many floors did the house have?", answer: "Two floors" },
+                { question: "What rooms were on the first floor?", answer: "Kitchen, living room, and small bathroom" },
+                { question: "Where was the house located?", answer: "In a quiet street near the center of town" },
+                { question: "Who lived in the house?", answer: "The person, parents, and younger brother" },
+                { question: "Why did the person like the house?", answer: "It was comfortable, peaceful, had a beautiful garden, and was near school" }
             ]
         },
         {
             title: "BOOK",
-            definition: "Describe a book you enjoyed reading.",
+            definition: "Describe a book that you enjoyed reading.",
             structure: `
                 <strong>You should say:</strong><br>
-                • What the book was<br>
-                • What it was about<br>
+                • What the book was about<br>
                 • When you read it<br>
-                • and explain whether you liked it or not and why
+                • Why you chose this book<br>
+                • What you learned from it
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                One book that I really enjoyed reading was "The Data Warehouse Toolkit" by Ralph Kimball. Although it might sound technical and boring to some people, it was fascinating for me as a data engineer.<br><br>
+                Last year, I read a very interesting book called "The Little Prince". It is a famous story about a young prince who travels to different planets and meets many strange people.<br><br>
                 
-                The book is about data warehousing and business intelligence. It explains how to design and build data warehouses that help companies make better decisions based on their data. It covers dimensional modeling, which is a technique I use daily in my work at Globant, especially on the Disney project where we handle massive amounts of user data.<br><br>
+                I read this book during my summer vacation. It took me about two weeks to finish it because I read it slowly. I wanted to understand every part of the story very well.<br><br>
                 
-                I read this book about two years ago when I was looking to advance my career in data engineering. I would read it in the evenings after Ethan went to bed, and sometimes during my lunch breaks. It took me about three months to finish because I wanted to understand every concept thoroughly.<br><br>
+                I chose this book because my teacher said it was very good. She told our class that it was not just for children, but adults could enjoy it too. I was curious about why this book was so popular.<br><br>
                 
-                I really liked this book because it changed how I approach my work. The concepts I learned helped me become more efficient and effective in my role. The author explains complex topics in a clear, practical way with real-world examples. What I appreciated most was how the book connected theory with practice. Now, when I'm working on data pipelines for Disney's platforms, I apply many of the principles I learned from this book. It's definitely a book I would recommend to other data professionals.
+                From this book, I learned that the most important things in life are not money or big houses. The book taught me that friendship, love, and kindness are more valuable. It also showed me that adults sometimes forget how to see the world like children do. This book changed the way I think about many things.
             `,
             exercises: [
-                { question: "What book did you enjoy?", answer: "The Data Warehouse Toolkit by Ralph Kimball" },
-                { question: "What was it about?", answer: "Data warehousing and business intelligence techniques" },
-                { question: "When did you read it?", answer: "About two years ago, over three months" },
-                { question: "Why did you like it?", answer: "It improved my work skills and connected theory with practice" },
-                { question: "How do you use what you learned?", answer: "I apply the principles in my work on Disney's data platforms" }
+                { question: "What is the name of the book?", answer: "The Little Prince" },
+                { question: "What is the story about?", answer: "A young prince who travels to different planets" },
+                { question: "How long did it take to read?", answer: "About two weeks" },
+                { question: "Why did the person choose this book?", answer: "The teacher said it was very good" },
+                { question: "What did the person learn?", answer: "That friendship, love, and kindness are most important" }
             ]
         },
         {
             title: "CHOICE",
-            definition: "Describe an important choice you had to make in your life.",
+            definition: "Describe an important choice you had to make.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What choice you had to make<br>
+                • When you had to make it<br>
+                • What you decided<br>
+                • How you feel about your choice now
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                One of the most important choices I had to make in my life was deciding to specialize in data engineering and accept the position at Globant to work on the Disney project.<br><br>
+                Two years ago, I had to make an important choice about my studies. I finished high school and I had to decide what to study at university. This was very difficult for me.<br><br>
                 
-                This choice came about three years ago when I was working in a different field and had the opportunity to transition into technology. I had to choose between staying in my comfortable but limited job or taking a risk to enter the competitive world of data engineering.<br><br>
+                I had two options. I could study business like my father wanted, or I could study art like I wanted. My parents thought business was better because I could find a good job easily. But I loved drawing and painting.<br><br>
                 
-                I believe I made a very good choice. This decision has allowed me to work on exciting projects like Disney's data platforms, earn a better salary to support Neli and our children, and develop skills that are in high demand globally. It also gave me the flexibility to work from home in Abancay, which means I can spend more time with Ethan and Anne.<br><br>
+                After thinking for many weeks, I decided to study art. It was not easy to tell my parents, but I explained that art made me happy. Finally, they understood and supported my decision.<br><br>
                 
-                I felt nervous and excited about this choice at the same time. It required a lot of studying and learning new technologies, but seeing how it has improved our family's quality of life and my professional growth makes me confident that it was the right decision.
+                Now I am very happy with my choice. I love my art classes and I am learning many new things. My parents are proud of me because I work hard. I think it is important to follow your dreams, even when it is difficult. I made the right choice for me.
             `,
             exercises: [
-                { question: "What important choice did you make?", answer: "To specialize in data engineering and join Globant" },
-                { question: "When did you make this choice?", answer: "About three years ago" },
-                { question: "Was it a good choice?", answer: "Yes, it improved my career and family life" },
-                { question: "How did you feel about it?", answer: "Nervous but excited about the opportunity" }
+                { question: "What choice did the person have to make?", answer: "What to study at university" },
+                { question: "What were the two options?", answer: "Study business or study art" },
+                { question: "What did the parents want?", answer: "They wanted him to study business" },
+                { question: "What did the person decide?", answer: "To study art" },
+                { question: "How does the person feel now?", answer: "Very happy with the choice" }
             ]
         },
         {
             title: "CHILDHOOD",
-            definition: "Describe something you enjoyed doing as a child.",
+            definition: "Describe a memory from when you were a child.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What happened<br>
+                • How old you were<br>
+                • Who was with you<br>
+                • Why you remember it well
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                When I was a child growing up in Peru, one of my favorite activities was playing football with my friends in the neighborhood. We would play almost every afternoon after school in a small field near our houses.<br><br>
+                I have a very happy memory from when I was seven years old. It was my first day at a new school and I was very nervous. I didn't know any children there and I was scared.<br><br>
                 
-                I used to play this sport from when I was about 7 years old until I was around 15. We would gather after finishing our homework, usually around 4 PM, and play until it got dark. During weekends, we would sometimes play for hours, organizing small tournaments with other neighborhood teams.<br><br>
+                My mother took me to school that morning. She walked with me to my new classroom and introduced me to my teacher, Mrs. Garcia. The teacher was very kind and smiled at me.<br><br>
                 
-                I played with my school friends and neighbors. There were usually about 10-12 kids, and we would divide into two teams. Some of my closest friendships were formed during these games. We didn't have proper equipment - just a ball and some stones to mark the goals.<br><br>
+                During the first break, a girl named Ana came to talk to me. She asked if I wanted to play with her and her friends. We played games in the playground and I had a lot of fun. By the end of the day, I had made three new friends.<br><br>
                 
-                I don't play football regularly anymore because of my work responsibilities and family commitments with Neli, Ethan, and Anne. However, I still enjoy watching matches on TV, and I'm looking forward to teaching Ethan how to play when he gets older.<br><br>
-                
-                I enjoyed it so much because it was pure fun and freedom. There was no pressure, just the joy of running, competing, and being with friends. It taught me teamwork, perseverance, and how to handle both winning and losing gracefully - skills that have helped me in my professional life as a data engineer.
+                I remember this day very well because it taught me something important. I learned that new situations are not always scary. Sometimes they can bring good things into your life. Ana became my best friend and we are still friends today. That first day at school was the beginning of a beautiful friendship.
             `,
             exercises: [
-                { question: "What did you enjoy as a child?", answer: "Playing football with neighborhood friends" },
-                { question: "When and where did you do it?", answer: "Afternoons after school in a local field" },
-                { question: "Who did you do it with?", answer: "School friends and neighbors, about 10-12 kids" },
-                { question: "Do you still do it?", answer: "Not regularly, but I watch games and plan to teach my son" }
+                { question: "How old was the person?", answer: "Seven years old" },
+                { question: "Why was the person nervous?", answer: "It was the first day at a new school" },
+                { question: "Who was the teacher?", answer: "Mrs. Garcia" },
+                { question: "What was the name of the girl who talked to him?", answer: "Ana" },
+                { question: "What did the person learn?", answer: "That new situations are not always scary" }
             ]
         },
         {
             title: "CITY OR TOWN",
-            definition: "Describe a city you know well.",
+            definition: "Describe a city or town you have visited.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • Where it is<br>
+                • When you went there<br>
+                • What you did there<br>
+                • What you thought about it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                The city I know best is Abancay, the capital of Apurímac region in Peru, where I currently live with my family. It's a medium-sized city with approximately 60,000 inhabitants, nestled in the Andes mountains.<br><br>
+                Last summer, I visited the city of Barcelona in Spain. It is a big city near the sea in the east of Spain. I went there with my family for our summer vacation.<br><br>
                 
-                Abancay has a mix of colonial and modern buildings. The main square features a beautiful colonial church and government buildings, while the newer areas have modern houses and commercial centers. Most buildings are low-rise due to earthquake regulations, and many homes have traditional red tile roofs that give the city a distinctive character.<br><br>
+                We stayed in Barcelona for one week in July. The weather was very hot and sunny every day. We stayed in a small hotel near the beach, so we could walk to the sea easily.<br><br>
                 
-                Transportation in Abancay includes buses, taxis, and motorcycle taxis called "mototaxis." Many people also walk or use bicycles for short distances. The city is small enough that you can walk across the center in about 20 minutes. There's also a small airport that connects to Lima and other major cities.<br><br>
+                During our visit, we did many interesting things. We walked around the old part of the city and saw beautiful old buildings. We also went to the beach every day and swam in the sea. The food was delicious - we ate a lot of fish and rice.<br><br>
                 
-                What I particularly like about Abancay is its peaceful atmosphere and the stunning mountain scenery that surrounds us. The climate is pleasant year-round, and it's a safe place to raise children like Ethan and Anne. The cost of living is reasonable, which allows me to work remotely for Globant while maintaining a good quality of life. However, what I sometimes dislike is the limited entertainment options and the fact that some modern services and products take longer to arrive here compared to larger cities like Lima.
+                I loved Barcelona because it was so different from my hometown. The city was full of life and there were always people in the streets. The architecture was amazing and the people were very friendly. I want to go back to Barcelona again because there are still many places I want to see there.
             `,
             exercises: [
-                { question: "Which city do you know well?", answer: "Abancay, the capital of Apurímac region in Peru" },
-                { question: "How big is the city?", answer: "Medium-sized with approximately 60,000 inhabitants" },
-                { question: "What transportation is available?", answer: "Buses, taxis, mototaxis, bicycles, and walking" },
-                { question: "What do you like about it?", answer: "Peaceful atmosphere, mountain scenery, and good for raising children" }
+                { question: "Which city did the person visit?", answer: "Barcelona in Spain" },
+                { question: "When did they visit?", answer: "Last summer for one week in July" },
+                { question: "Where did they stay?", answer: "In a small hotel near the beach" },
+                { question: "What did they do there?", answer: "Walked around old city, went to beach, swam, ate local food" },
+                { question: "What did the person think about Barcelona?", answer: "Loved it because it was full of life and very different" }
             ]
         },
         {
             title: "FAMILY",
-            definition: "Describe someone in your family who you like.",
+            definition: "Describe a member of your family you admire.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • Who this person is<br>
+                • What they are like<br>
+                • What they do<br>
+                • Why you admire them
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                The person in my family who I like most is my wife, Neli. She is not just my spouse but also my best friend and the mother of our two beautiful children, Ethan and Anne.<br><br>
+                The person in my family I admire most is my grandmother. She is 75 years old but she is still very active and strong. She has gray hair and always wears a big smile on her face.<br><br>
                 
-                Neli is a beautiful woman with long dark hair and warm brown eyes. She has a gentle smile that can light up any room. She's of average height and has a graceful way of moving. What strikes people most about her appearance is her kind and welcoming expression.<br><br>
+                My grandmother is a very kind and patient person. She never gets angry and always listens to everyone's problems. She loves to cook and makes the best food in our family. She also likes to tell us stories about her life when she was young.<br><br>
                 
-                As a person, Neli is incredibly patient, caring, and intelligent. She has an amazing ability to stay calm under pressure, which is especially valuable when dealing with our two young children. She's also very organized and manages our household efficiently while I work on my data engineering projects for Globant. Neli is supportive of my career and understands the demands of working on international projects like Disney.<br><br>
+                Even though she is old, my grandmother still works in her small garden every day. She grows vegetables and flowers. She also helps take care of my little cousins when their parents are working.<br><br>
                 
-                I like Neli because she brings balance to my life. While I can get absorbed in technical work and data analysis, she keeps me grounded and reminds me of what's truly important - our family. She's an excellent mother to Ethan and Anne, always patient and loving. Her sense of humor helps us get through difficult times, and her wisdom often guides our family decisions. She makes our house in Abancay feel like a true home.
+                I admire my grandmother because she is always happy and positive. She has lived through many difficult times, but she never complains. She taught me that family is the most important thing in life. She shows love to everyone and makes our family strong. I hope I can be like her when I am old.
             `,
             exercises: [
-                { question: "Who do you like most in your family?", answer: "My wife, Neli" },
-                { question: "What does she look like?", answer: "Beautiful with long dark hair, brown eyes, and a kind smile" },
-                { question: "What kind of person is she?", answer: "Patient, caring, intelligent, and organized" },
-                { question: "Why do you like her?", answer: "She brings balance to my life and is an excellent mother" }
+                { question: "Who does the person admire?", answer: "His grandmother" },
+                { question: "How old is the grandmother?", answer: "75 years old" },
+                { question: "What does the grandmother like to do?", answer: "Cook, tell stories, work in garden, take care of cousins" },
+                { question: "What is the grandmother's personality like?", answer: "Kind, patient, never gets angry, always happy" },
+                { question: "Why does the person admire her?", answer: "She is always positive, shows love to everyone, makes family strong" }
             ]
         },
         {
             title: "DAY",
-            definition: "Describe a typical day at work, school or college.",
+            definition: "Describe a typical day in your life.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What time you wake up<br>
+                • What you do during the day<br>
+                • What you do in the evening<br>
+                • How you feel about your daily routine
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                My typical workday as a data engineer at Globant starts early at around 7:00 AM when I wake up in our house in Abancay. I begin by having breakfast with Neli and helping her get Ethan ready for the day, while Anne is still sleeping.<br><br>
+                I want to tell you about a typical day in my life. I usually wake up at 7 AM when my alarm clock rings. The first thing I do is brush my teeth and wash my face with cold water.<br><br>
                 
-                By 8:30 AM, I'm in my home office starting my workday. I usually begin by checking emails and messages from my team members who work on the Disney project. From 9:00 AM to 12:00 PM, I focus on coding and developing data pipelines. I take a short break around 10:30 AM to have coffee and check on the family.<br><br>
+                After breakfast, I go to university by bus. My classes start at 9 AM and finish at 3 PM. I study different subjects like English, math, and science. During lunch break, I eat with my friends in the cafeteria.<br><br>
                 
-                Lunch is at 1:00 PM with Neli and the kids. After lunch, I continue working from 2:00 PM to 6:00 PM, which includes team meetings via video calls with colleagues from different time zones. I usually have one or two important meetings during this time to discuss project progress and technical challenges.<br><br>
+                When I come home at 4 PM, I rest for a little while. Then I do my homework and help my mother prepare dinner. We eat together as a family at 7 PM and talk about our day.<br><br>
                 
-                I've had this routine for about three years since joining Globant, and it works well for our family life. However, I would like to change the timing of some international meetings because they sometimes extend into the evening, which means less time with Ethan and Anne. I'd also like to have a dedicated break in the afternoon to take a short walk and enjoy the beautiful mountain views around Abancay.
+                In the evening, I watch TV or read a book. Sometimes I call my friends or play games on my phone. I go to bed at 10 PM because I need to wake up early the next day. I like my daily routine because it is simple and organized.
             `,
             exercises: [
-                { question: "What time do you start work?", answer: "Around 8:30 AM in my home office" },
-                { question: "What do you do in the morning?", answer: "Check emails, code, and develop data pipelines" },
-                { question: "How long have you had this routine?", answer: "About three years since joining Globant" },
-                { question: "What would you like to change?", answer: "Meeting times and add an afternoon walk break" }
+                { question: "What time does the person wake up?", answer: "At 7 AM" },
+                { question: "How does he go to university?", answer: "By bus" },
+                { question: "What time do classes finish?", answer: "At 3 PM" },
+                { question: "What does he do in the evening?", answer: "Watch TV, read, call friends, or play games" },
+                { question: "What time does he go to bed?", answer: "At 10 PM" }
             ]
         },
         {
             title: "EVENT-EXPERIENCE (Memorable)",
-            definition: "Describe a memorable event in your life.",
+            definition: "Describe a memorable experience you had.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the experience was<br>
+                • When it happened<br>
+                • Who was with you<br>
+                • Why it was memorable
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                One of the most memorable events in my life was the birth of my first child, Ethan, which took place two years ago in Abancay.<br><br>
+                One of my most memorable experiences was my first airplane trip. It happened two years ago when I was 16 years old. I had never been on a plane before, so I was very excited and a little scared.<br><br>
                 
-                The event happened at the local hospital in Abancay on a beautiful morning in early spring. Neli had been in labor for several hours, and I was both nervous and excited. The medical team was very professional and supportive throughout the process.<br><br>
+                I was traveling with my family to visit my uncle who lives in another city. We had to wake up very early to get to the airport. When I saw the big airplane, I couldn't believe I was going to fly in it.<br><br>
                 
-                What happened exactly was that after a long night of waiting and supporting Neli, our son Ethan was finally born healthy and strong. The moment I heard his first cry and saw him for the first time was absolutely incredible. The doctor placed him in Neli's arms, and we both started crying tears of joy. It was a perfect moment that I will never forget.<br><br>
+                During the flight, I sat next to the window and looked down at the clouds and the small houses below. Everything looked so tiny from up there. The flight attendant was very nice and gave us drinks and snacks.<br><br>
                 
-                This event was memorable for me because it marked the beginning of my journey as a father. It changed my perspective on life completely and gave me new motivation to work hard and provide for my family. Holding Ethan for the first time made me realize the true meaning of responsibility and unconditional love. Now, watching him grow and develop his personality every day continues to be one of the greatest joys of my life, along with his little sister Anne who joined our family 11 months later.
+                This experience was memorable because it was my first time flying and it opened my eyes to how big the world is. I felt like an adult and it made me want to travel to more places. Now I am not scared of flying anymore and I hope to take many more trips in the future.
             `,
             exercises: [
-                { question: "What memorable event do you describe?", answer: "The birth of my first child, Ethan" },
-                { question: "When and where did it happen?", answer: "Two years ago at the local hospital in Abancay" },
-                { question: "What happened exactly?", answer: "Ethan was born healthy after a long labor" },
-                { question: "Why was it memorable?", answer: "It marked the beginning of my journey as a father" }
+                { question: "What was the memorable experience?", answer: "The first airplane trip" },
+                { question: "How old was the person?", answer: "16 years old" },
+                { question: "Who was traveling with him?", answer: "His family" },
+                { question: "Where did he sit on the plane?", answer: "Next to the window" },
+                { question: "Why was it memorable?", answer: "It was his first time flying and opened his eyes to the world" }
             ]
         },
         {
             title: "EVENT-EXPERIENCE (Success)",
-            definition: "Describe a particular event in which you were successful.",
+            definition: "Describe a time when you were successful at something.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What you were successful at<br>
+                • When this happened<br>
+                • How you prepared for it<br>
+                • How you felt about your success
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                A particular event where I was successful was when I completed a critical data migration project for Disney's platform while working at Globant, which happened about 18 months ago.<br><br>
+                I want to tell you about a time when I was very successful. It was when I won first place in a school English competition last year. I was very surprised because I didn't expect to win.<br><br>
                 
-                The situation was quite challenging because we needed to migrate millions of user records from an old system to a new, more efficient database structure without any data loss or downtime. This happened over several weeks, but the critical implementation was during a weekend in our home office in Abancay, coordinating with teams in different time zones.<br><br>
+                The competition was in November and all the students in my grade could participate. We had to write a short story in English and then read it in front of the judges. I was very nervous about speaking in public.<br><br>
                 
-                The preparation involved months of planning, testing, and creating backup strategies. I had to learn new technologies, work closely with international teams, and develop scripts that could handle massive amounts of data safely. I spent many evenings after Ethan went to bed studying and preparing for this project, while Neli was pregnant with Anne.<br><br>
+                I prepared for the competition for three weeks. I wrote my story about a friendship between a boy and a dog. I practiced reading it many times at home. My English teacher helped me with pronunciation and grammar.<br><br>
                 
-                When the migration was completed successfully without any issues, I felt an incredible sense of achievement and relief. My manager and the Disney team were very pleased with the results, and it led to more responsibilities and recognition within Globant. I felt proud that I could deliver such an important project while working remotely from Abancay, proving that location doesn't limit professional success. This achievement also gave me confidence in my technical abilities and opened doors for future challenging projects.
+                When they announced that I was the winner, I felt so happy and proud. My parents were very excited too. This success gave me more confidence in my English skills. It also taught me that hard work and practice can help you achieve your goals. I will never forget this special day.
             `,
             exercises: [
-                { question: "What success do you describe?", answer: "Completing a critical data migration project for Disney" },
-                { question: "When and where did it happen?", answer: "18 months ago, working from home in Abancay" },
-                { question: "What preparation was involved?", answer: "Months of planning, testing, learning new technologies" },
-                { question: "How did you feel about the success?", answer: "Proud and confident, it led to more recognition" }
+                { question: "What competition did the person win?", answer: "A school English competition" },
+                { question: "What did students have to do?", answer: "Write a short story and read it to judges" },
+                { question: "What was the story about?", answer: "A friendship between a boy and a dog" },
+                { question: "How long did he prepare?", answer: "Three weeks" },
+                { question: "How did he feel when he won?", answer: "Happy and proud" }
             ]
         },
         {
             title: "EVENT-EXPERIENCE (School)",
-            definition: "Describe an enjoyable event that you experienced when you were at school.",
+            definition: "Describe an important experience you had at school.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What happened at school<br>
+                • When it happened<br>
+                • Who was involved<br>
+                • What you learned from it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                An enjoyable event I experienced at school was our annual science fair when I was in my final year of high school. This was a special event where students could present their own research projects and experiments.<br><br>
+                I want to tell you about an important experience I had at school. It happened during my second year when I had to give a presentation in front of my whole class. I was very nervous because I don't like speaking in public.<br><br>
                 
-                What happened was that I decided to create a project about renewable energy, specifically solar panels. I built a small working model that could power LED lights and charge small devices. I spent weeks researching, building, and testing my project. On the day of the fair, I presented my work to teachers, parents, and other students.<br><br>
+                The presentation was about animals and I chose to talk about dolphins. I had to prepare for two weeks and learn a lot of information. My teacher helped me organize my ideas and practice speaking clearly.<br><br>
                 
-                What was good about it was that my project won second place in the technology category. More importantly, I discovered my passion for understanding how systems work and solving technical problems. The judges were impressed with my presentation and the practical application of my project. I also enjoyed seeing other students' creative projects and learning from them.<br><br>
+                On the day of the presentation, I felt very scared. My hands were shaking and my voice was quiet at first. But my classmates were very kind and listened carefully. My teacher smiled at me and this made me feel better.<br><br>
                 
-                I particularly remember this event because it was the first time I felt truly confident about my technical abilities. It gave me the motivation to pursue a career in technology, which eventually led me to become a data engineer at Globant. Looking back, I can see how this experience planted the seeds for my current success working on projects like Disney's data platforms. It taught me that with dedication and curiosity, I could tackle complex technical challenges.
+                This experience taught me that I can do difficult things if I practice and prepare well. I also learned that my classmates are supportive and want me to succeed. Now I am not as scared of speaking in public and I feel more confident in class.
             `,
             exercises: [
-                { question: "What school event do you describe?", answer: "The annual science fair in my final year" },
-                { question: "What was your project?", answer: "A solar panel model that could power LED lights" },
-                { question: "What was good about it?", answer: "Won second place and discovered my passion for technology" },
-                { question: "Why do you remember it?", answer: "It gave me confidence and led to my tech career" }
+                { question: "What did the person have to do?", answer: "Give a presentation in front of the class" },
+                { question: "What was the presentation about?", answer: "Animals, specifically dolphins" },
+                { question: "How long did he prepare?", answer: "Two weeks" },
+                { question: "How did he feel on presentation day?", answer: "Very scared, hands shaking, quiet voice" },
+                { question: "What did he learn?", answer: "He can do difficult things with practice and his classmates are supportive" }
             ]
         },
         {
             title: "ENVIRONMENT",
-            definition: "Describe a serious environmental problem in your country.",
+            definition: "Describe an environmental problem in your area.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the problem is<br>
+                • What causes this problem<br>
+                • How it affects people<br>
+                • What can be done about it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                One of the most serious environmental problems in Peru is deforestation in the Amazon rainforest, which affects not only our country but the entire world.<br><br>
+                In my city, we have a big problem with air pollution. The air is not clean and sometimes you can see gray smoke in the sky. This problem is getting worse every year and it makes many people worried.<br><br>
                 
-                The effects of this problem are devastating. We're losing biodiversity as many plant and animal species lose their natural habitat. This also contributes to climate change because trees that absorb carbon dioxide are being cut down. Additionally, it affects indigenous communities who depend on the forest for their livelihood. Even here in Abancay, we can feel the effects through changes in weather patterns and rainfall.<br><br>
+                The main cause of this problem is the many cars and buses on our roads. There are also some factories near the city that produce smoke. When there is no wind, the dirty air stays over the city for many days.<br><br>
                 
-                This problem is caused by several factors including illegal logging, cattle ranching, agriculture expansion, and mining activities. Many companies cut down trees to create space for farming or to extract valuable timber. Sometimes, local communities also contribute to the problem because they need land for agriculture to survive economically.<br><br>
+                This pollution affects people's health. Many people cough more and have problems breathing. Children and old people are especially affected. Some people have to go to the hospital because of breathing problems.<br><br>
                 
-                To solve this problem, the government needs to enforce stricter laws against illegal logging and provide economic alternatives for local communities. We can also promote sustainable tourism and support companies that use environmentally friendly practices. As individuals, we can reduce paper consumption, support reforestation projects, and educate others about the importance of preserving our forests. In my work with technology at Globant, I try to promote digital solutions that reduce paper usage, and I teach Ethan about the importance of protecting nature.
+                I think we can solve this problem if we work together. People can use public transport more and walk or ride bicycles for short trips. The government should also make rules for factories to produce less pollution. If we all help, we can make our air cleaner and healthier.
             `,
             exercises: [
-                { question: "What environmental problem do you describe?", answer: "Deforestation in the Amazon rainforest" },
-                { question: "What are the effects?", answer: "Loss of biodiversity, climate change, affects indigenous communities" },
-                { question: "What causes this problem?", answer: "Illegal logging, cattle ranching, agriculture, and mining" },
-                { question: "What solutions do you suggest?", answer: "Stricter laws, economic alternatives, sustainable tourism" }
-            ]
-        },
-        {
-            title: "FAMILY (Admire)",
-            definition: "Describe the person in your family who you most admire.",
-            examples: `
-                <strong>Sample Writing:</strong><br><br>
-                The person in my family who I most admire is my mother. She is my inspiration and has been the strongest influence in my life.<br><br>
-                
-                My mother is now in her 60s and has lived through many challenges in Peru. She raised three children mostly on her own while working multiple jobs to support our family. She worked as a teacher during the day and took on additional work in the evenings to make sure we had everything we needed for school and life.<br><br>
-                
-                Currently, she is retired but still very active in her community. She volunteers at a local school helping children with reading difficulties, and she also helps take care of elderly neighbors. Even though she's getting older, she remains energetic and always finds ways to help others. She visits us in Abancay regularly and loves spending time with her grandchildren, Ethan and Anne.<br><br>
-                
-                I admire her so much because of her incredible strength and selflessness. Despite facing financial difficulties and personal challenges, she never gave up and always put her children's needs before her own. She taught me the value of hard work, education, and helping others. Her determination to give us a better life motivated me to study hard and eventually become a data engineer. She also taught me the importance of family, which is why I work so hard to provide for Neli and our children. Her wisdom and unconditional love continue to guide me in my role as a husband and father.
-            `,
-            exercises: [
-                { question: "Who do you most admire?", answer: "My mother" },
-                { question: "What has she done in her life?", answer: "Raised three children while working multiple jobs" },
-                { question: "What does she do now?", answer: "Volunteers at school and helps elderly neighbors" },
-                { question: "Why do you admire her?", answer: "Her strength, selflessness, and dedication to family" }
+                { question: "What environmental problem does the city have?", answer: "Air pollution" },
+                { question: "What causes this problem?", answer: "Many cars, buses, and factories producing smoke" },
+                { question: "Who is especially affected?", answer: "Children and old people" },
+                { question: "What solutions does the person suggest?", answer: "Use public transport, walk, ride bicycles, government rules for factories" },
+                { question: "What happens when there is no wind?", answer: "The dirty air stays over the city for many days" }
             ]
         },
         {
             title: "FAVORITES (TV Program)",
-            definition: "Describe your favorite television program.",
+            definition: "Describe your favorite TV program.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the program is<br>
+                • What it is about<br>
+                • When you watch it<br>
+                • Why you like it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                My favorite television program is a documentary series called "How It's Made" which shows how different products and technologies are manufactured and developed.<br><br>
+                My favorite TV program is called "Nature World". It is a documentary program about animals and plants from different countries around the world. I have been watching this program for three years and I never get bored of it.<br><br>
                 
-                This is an educational documentary program where each episode focuses on the manufacturing process of various items, from simple everyday objects to complex technological devices. The program shows step-by-step how things are made in factories, explaining the science and engineering behind each process. What happens during the program is that cameras follow the entire production line, and a narrator explains each stage clearly.<br><br>
+                Each episode shows different animals in their natural homes. Last week, the program was about penguins in Antarctica. The week before, it showed lions in Africa. The program also explains how animals live and what they eat.<br><br>
                 
-                I usually watch this program in the evenings after work, around 8:00 PM when Ethan and Anne are sleeping. Sometimes Neli joins me, and we watch it together while relaxing after a busy day. I also sometimes watch episodes during my lunch break when I need a mental break from my data engineering work at Globant.<br><br>
+                I usually watch "Nature World" on Sunday evenings at 8 PM. Sometimes I watch it with my family, but often I watch it alone because I like to concentrate on the information. Each episode is one hour long.<br><br>
                 
-                I enjoy this program so much because it satisfies my curiosity about how things work, which is probably related to my profession as a data engineer. I find it fascinating to see the engineering solutions and the precision required in manufacturing processes. It also gives me ideas that I can sometimes apply to my work when designing data pipelines - thinking about efficiency, quality control, and systematic processes. Additionally, it's relaxing and educational at the same time, which makes it perfect for unwinding after working on complex Disney project requirements.
+                I love this program because I learn many new things about animals and nature. The photography is beautiful and the narrator has a nice voice. It makes me want to travel and see these animals in real life. This program also teaches me why we need to protect nature and animals.
             `,
             exercises: [
-                { question: "What's your favorite TV program?", answer: "How It's Made documentary series" },
-                { question: "What type of program is it?", answer: "Educational documentary about manufacturing processes" },
-                { question: "When do you watch it?", answer: "Evenings around 8 PM and sometimes during lunch" },
-                { question: "Why do you enjoy it?", answer: "It satisfies my curiosity and relates to my engineering work" }
+                { question: "What is the name of the TV program?", answer: "Nature World" },
+                { question: "What type of program is it?", answer: "A documentary about animals and plants" },
+                { question: "When does the person watch it?", answer: "Sunday evenings at 8 PM" },
+                { question: "How long is each episode?", answer: "One hour long" },
+                { question: "Why does the person like it?", answer: "Learns new things, beautiful photography, makes him want to travel" }
             ]
         },
         {
             title: "FESTIVAL",
-            definition: "Describe a festival that is important in your country.",
+            definition: "Describe a festival or celebration in your country.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the festival is<br>
+                • When it happens<br>
+                • What people do during it<br>
+                • Why it is important
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                One of the most important festivals in Peru is Inti Raymi, the Festival of the Sun, which celebrates the winter solstice and honors the Inca sun god Inti.<br><br>
+                One of the most important festivals in my country is the New Year celebration. It happens every year on December 31st and January 1st. This is a very special time for families and friends to come together.<br><br>
                 
-                This festival occurs every year on June 24th, primarily in Cusco, but it's celebrated throughout Peru including here in Apurímac. During this festival, I usually spend time with my family watching the traditional ceremonies on television, and we often prepare special foods. In Abancay, there are smaller local celebrations with traditional music and dance. Neli and I like to take Ethan to see the colorful costumes and listen to the Andean music, though Anne is still too young to fully appreciate it.<br><br>
+                During this festival, people have big parties and eat special food. Many families prepare traditional dishes and invite relatives to their homes. At midnight, everyone watches fireworks in the sky and makes wishes for the new year.<br><br>
                 
-                What I like most about Inti Raymi is how it connects us to our ancient Inca heritage and brings communities together. The festival features beautiful traditional clothing, impressive ceremonies, and wonderful music that makes me feel proud of our Peruvian culture. I also enjoy the special foods that are prepared during this time, especially the traditional dishes that remind me of my childhood.<br><br>
+                People also give gifts to each other and children receive money from their grandparents. Many people wear new clothes and clean their houses before the celebration. Some people go to church to pray for good luck in the new year.<br><br>
                 
-                This festival is important because it preserves our indigenous culture and traditions that date back hundreds of years. It helps younger generations, like Ethan, learn about our history and cultural identity. Inti Raymi also attracts tourists from around the world, which helps our economy. For me personally, it's a time to reflect on our roots and share our cultural heritage with my children, ensuring that these important traditions continue to the next generation.
+                This festival is important because it brings families together and gives people hope for the future. It is a time to forget about problems from the past year and think about new possibilities. Everyone feels happy and optimistic during this celebration. It is my favorite time of the year.
             `,
             exercises: [
-                { question: "What festival do you describe?", answer: "Inti Raymi, the Festival of the Sun" },
-                { question: "When does it occur?", answer: "Every year on June 24th" },
-                { question: "What do you like about it?", answer: "It connects us to Inca heritage and brings communities together" },
-                { question: "Why is it important?", answer: "It preserves indigenous culture and teaches younger generations" }
+                { question: "What festival is described?", answer: "New Year celebration" },
+                { question: "When does it happen?", answer: "December 31st and January 1st" },
+                { question: "What do people do at midnight?", answer: "Watch fireworks and make wishes" },
+                { question: "What do children receive?", answer: "Money from their grandparents" },
+                { question: "Why is this festival important?", answer: "Brings families together and gives hope for the future" }
             ]
         },
         {
             title: "FOOD",
-            definition: "Describe a special dish from your country.",
+            definition: "Describe a traditional food from your country.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the food is<br>
+                • What it is made of<br>
+                • When people eat it<br>
+                • Why you like or dislike it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                A special dish from Peru that I would like to describe is "Ceviche," which is considered our national dish and represents the best of Peruvian cuisine.<br><br>
+                I want to tell you about a traditional food from my country called "empanadas". These are small pies that are very popular here. You can find them in restaurants, street markets, and many people make them at home.<br><br>
                 
-                Ceviche is prepared using fresh raw fish, typically sea bass or sole, which is cut into small cubes and "cooked" in citrus juices, mainly lime juice. The acid in the lime juice chemically cooks the fish. It's then mixed with sliced red onions, chili peppers (ají), salt, and pepper. The dish is garnished with cilantro and served with sweet potato, corn, and sometimes lettuce.<br><br>
+                Empanadas are made with a thin pastry that is filled with different ingredients. The most common filling is meat with onions, but you can also find them with cheese, chicken, or vegetables. They are baked in the oven until they are golden brown.<br><br>
                 
-                Ceviche is traditionally served in restaurants along the coast, especially in Lima, but you can find good versions throughout Peru. It's typically eaten as lunch, never for dinner, because it's believed that seafood should be consumed fresh during the day. Here in Abancay, we have some restaurants that serve decent ceviche, though it's not as fresh as on the coast.<br><br>
+                People eat empanadas at different times. Some people have them for lunch or dinner, and others eat them as a snack. They are very popular at parties and family gatherings. Many people also eat them while watching football games.<br><br>
                 
-                I would definitely recommend ceviche to any visitor to Peru. It's not just food; it's a cultural experience that represents our connection to the Pacific Ocean and our culinary creativity. The combination of fresh fish, tangy lime, and spicy peppers creates a unique flavor that you can't find anywhere else in the world. However, I would advise visitors to eat it only at reputable restaurants to ensure the fish is fresh and properly prepared. When Neli and I travel to Lima, we always make sure to have authentic ceviche, and I look forward to introducing this dish to Ethan and Anne when they're older.
+                I really love empanadas because they are delicious and convenient to eat. You can hold them in your hand and they are not messy. They are also not expensive, so students like me can afford them. My favorite type is the one with meat and cheese. They remind me of home and family celebrations.
             `,
             exercises: [
-                { question: "What dish do you describe?", answer: "Ceviche, Peru's national dish" },
-                { question: "How is it prepared?", answer: "Raw fish cooked in lime juice with onions and peppers" },
-                { question: "Where is it served?", answer: "Restaurants throughout Peru, especially on the coast" },
-                { question: "Would you recommend it?", answer: "Yes, it's a unique cultural and culinary experience" }
+                { question: "What is the traditional food called?", answer: "Empanadas" },
+                { question: "What are they made of?", answer: "Thin pastry filled with meat, cheese, chicken, or vegetables" },
+                { question: "When do people eat them?", answer: "Lunch, dinner, snacks, parties, family gatherings, football games" },
+                { question: "Why does the person like them?", answer: "Delicious, convenient, not expensive, remind of home" },
+                { question: "What is the person's favorite type?", answer: "The one with meat and cheese" }
             ]
         },
         {
             title: "LEISURE ACTIVITY",
-            definition: "Describe something you do in your free time.",
+            definition: "Describe a leisure activity you enjoy doing.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What the activity is<br>
+                • When you do it<br>
+                • Who you do it with<br>
+                • Why you enjoy it
+            `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                In my free time, I enjoy learning new programming technologies and working on personal coding projects, which helps me stay current in my field as a data engineer.<br><br>
+                My favorite leisure activity is playing basketball. I started playing when I was 12 years old and I have loved this sport ever since. It is a great way to exercise and have fun at the same time.<br><br>
                 
-                I usually engage in this activity during weekends, typically on Saturday afternoons when Neli is taking care of Ethan and Anne, or sometimes in the evenings after the children are asleep. I spend about 2-3 hours at a time exploring new tools, reading technical documentation, or building small applications that interest me.<br><br>
+                I usually play basketball three times a week after school or work. I go to a court near my house where there are always other people who want to play. Sometimes I play with my friends, and other times I join games with people I don't know.<br><br>
                 
-                I do this activity in my home office in Abancay, the same space where I work for Globant during the week. I have a comfortable setup with multiple monitors and all the necessary equipment. Sometimes I also work on my laptop in the living room while the family is nearby, so I can still be present even while learning.<br><br>
+                Most of the time I play with a group of friends from my neighborhood. We have known each other for many years and we play very well together. Sometimes my brother joins us too, and we teach younger kids how to play.<br><br>
                 
-                I like doing this because it keeps me competitive in the rapidly changing technology industry and often helps me bring new ideas to my work on the Disney project. Learning new technologies is like solving puzzles, which I find intellectually stimulating and rewarding. It also gives me a sense of personal growth and achievement. Additionally, this hobby has practical benefits - the skills I learn often make me more efficient at work and sometimes lead to better opportunities. It's also a way for me to ensure I can continue providing well for my family by staying relevant in my profession. Even though it's technically work-related, I genuinely enjoy the process of discovery and problem-solving that comes with learning new technologies.
+                I enjoy basketball because it helps me stay healthy and strong. It also helps me forget about stress from school or work. When I play, I feel free and happy. I have made many good friends through basketball, and it has taught me about teamwork and never giving up. It is more than just a game for me.
             `,
             exercises: [
-                { question: "What do you do in your free time?", answer: "Learn new programming technologies and work on coding projects" },
-                { question: "When do you do it?", answer: "Saturday afternoons and evenings after children sleep" },
-                { question: "Where do you do it?", answer: "In my home office or living room in Abancay" },
-                { question: "Why do you like it?", answer: "It keeps me competitive and helps with personal growth" }
+                { question: "What is the person's favorite leisure activity?", answer: "Playing basketball" },
+                { question: "When did he start playing?", answer: "When he was 12 years old" },
+                { question: "How often does he play?", answer: "Three times a week" },
+                { question: "Who does he usually play with?", answer: "Friends from his neighborhood and sometimes his brother" },
+                { question: "Why does he enjoy it?", answer: "Helps stay healthy, forget stress, feel free and happy, made friends" }
             ]
         }
     ];
 }
+
+// Initialize topics when the script loads
+loadWritingTopics();
