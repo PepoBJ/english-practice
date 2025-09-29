@@ -545,11 +545,11 @@
         
         .mobile-section-tab {
             flex: 1;
-            padding: 12px 8px;
+            padding: 8px 4px;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.7em;
             font-weight: bold;
             transition: var(--transition);
             text-align: center;
@@ -638,6 +638,323 @@
             border-radius: 3px;
         }
         
+        /* Cheatsheet Styles - Visual Grid */
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        
+        .cheat-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        
+        .cheat-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .cheat-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+        }
+        
+        .cheat-rule {
+            font-size: 0.8em;
+            color: #333;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .cheat-examples {
+            margin-bottom: 8px;
+        }
+        
+        .cheat-example {
+            display: block;
+            font-size: 0.75em;
+            color: #555;
+            margin: 3px 0;
+            padding: 2px 0;
+        }
+        
+        .cheat-forms {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        
+        .cheat-neg, .cheat-q {
+            font-size: 0.7em;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .cheat-neg {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .cheat-q {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .mini-audio {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            font-size: 0.6em;
+            margin-left: 4px;
+            transition: all 0.2s;
+        }
+        
+        .mini-audio:hover {
+            background: #1976d2;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Vocabulary Cheatsheet */
+        .vocab-cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        
+        .vocab-cheat-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .vocab-cheat-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+            background: var(--light-bg);
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .vocab-cheat-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .vocab-tag {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .vocab-tag:hover {
+            background: var(--light-bg);
+            border-color: var(--primary-color);
+        }
+        
+        /* Phrases Cheatsheet */
+        .phrases-cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        
+        .phrases-cheat-card {
+            background: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .phrases-cheat-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+            background: var(--light-bg);
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .phrases-cheat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .phrase-tag {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+        
+        .phrase-tag:hover {
+            background: var(--light-bg);
+            border-color: var(--primary-color);
+        }
+        
+        /* Test Styles */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-header {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .test-question {
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            background: var(--primary-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 5px 0;
+        }
+        
+        .option-label:hover {
+            background: var(--light-bg);
+            border-color: var(--primary-color);
+        }
+        
+        .submit-test-btn,
+        .reset-test-btn {
+            padding: 12px 30px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-test-btn {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .reset-test-btn {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .score-display {
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        
+        .grade-excellent {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .grade-good {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            color: #1565c0;
+        }
+        
+        .grade-fair {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            color: #ef6c00;
+        }
+        
+        .grade-poor {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            color: #c62828;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -682,6 +999,16 @@
                     <div class="tab-icon">✍️</div>
                     <div class="tab-title">Writing</div>
                     <div class="tab-progress" id="writing-progress"></div>
+                </button>
+                <button class="sidebar-tab" onclick="showSection('cheatsheet')">
+                    <div class="tab-icon">📋</div>
+                    <div class="tab-title">Cheatsheet</div>
+                    <div class="tab-progress" id="cheatsheet-progress"></div>
+                </button>
+                <button class="sidebar-tab" onclick="showSection('test')">
+                    <div class="tab-icon">🎯</div>
+                    <div class="tab-title">Test</div>
+                    <div class="tab-progress" id="test-progress"></div>
                 </button>
             </div>
             
@@ -732,6 +1059,8 @@
                     <button class="mobile-section-tab" onclick="showSectionMobile('vocabulary')">📝 Vocabulary</button>
                     <button class="mobile-section-tab" onclick="showSectionMobile('verbs')">⚡ Verbs</button>
                     <button class="mobile-section-tab" onclick="showSectionMobile('writing')">✍️ Writing</button>
+                    <button class="mobile-section-tab" onclick="showSectionMobile('cheatsheet')">📋 Cheatsheet</button>
+                    <button class="mobile-section-tab" onclick="showSectionMobile('test')">🎯 Test</button>
                 </div>
                 
                 <div class="topic-list" id="mobile-topic-list">
@@ -1224,6 +1553,20 @@
                     currentTopics = allTopics.writing;
                     topicHTML = generateTopicHTML(currentTopics, 'selectTopic');
                     break;
+                    
+                case 'cheatsheet':
+                    currentTopics = [
+                        { title: 'Grammar Rules', type: 'grammar' },
+                        { title: 'Vocabulary Lists', type: 'vocabulary' },
+                        { title: 'Common Phrases', type: 'phrases' }
+                    ];
+                    topicHTML = generateTopicHTML(currentTopics, 'selectCheatsheetTopic');
+                    break;
+                    
+                case 'test':
+                    currentTopics = [{ title: 'Practice Test', type: 'test' }];
+                    topicHTML = generateTopicHTML(currentTopics, 'selectTestTopic');
+                    break;
             }
             
             elements.topicList.innerHTML = topicHTML;
@@ -1492,6 +1835,280 @@
             existingBtns.forEach(btn => btn.remove());
         }
         
+        function selectCheatsheetTopic(index) {
+            currentTopicIndex = index;
+            const topic = currentTopics[index];
+            
+            elements.titleEl.textContent = topic.title;
+            elements.subtitleEl.textContent = 'Quick Reference Guide';
+            
+            let contentHTML = '';
+            
+            if (topic.type === 'grammar') {
+                contentHTML = createCheatsheetGrammarContent();
+            } else if (topic.type === 'vocabulary') {
+                contentHTML = createCheatsheetVocabularyContent();
+            } else if (topic.type === 'phrases') {
+                contentHTML = createCheatsheetPhrasesContent();
+            }
+            
+            elements.contentEl.innerHTML = contentHTML;
+            updateNavigationButtons();
+            scrollToTop();
+            saveLastPosition();
+        }
+        
+        function selectTestTopic(index) {
+            currentTopicIndex = index;
+            elements.titleEl.textContent = 'Practice Test';
+            elements.subtitleEl.textContent = 'English A2 Level Assessment';
+            
+            const contentHTML = createTestContent();
+            elements.contentEl.innerHTML = contentHTML;
+            updateNavigationButtons();
+            scrollToTop();
+            saveLastPosition();
+        }
+        
+        function createCheatsheetGrammarContent() {
+            let html = '<div class="cheatsheet-grid">';
+            
+            cheatsheetContent.grammar.forEach(rule => {
+                html += `
+                    <div class="cheat-card">
+                        <div class="cheat-title">${rule.title}</div>
+                        <div class="cheat-rule">${rule.rule}</div>
+                        <div class="cheat-examples">
+                            ${rule.examples.slice(0, 2).map(ex => `<span class="cheat-example">${ex} <button onclick="speakText('${ex.replace(/'/g, "\\'")}')" class="mini-audio">🔊</button></span>`).join('')}
+                        </div>
+                        <div class="cheat-forms">
+                            <span class="cheat-neg">❌ ${rule.negative}</span>
+                            <span class="cheat-q">❓ ${rule.question}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        function createCheatsheetVocabularyContent() {
+            let html = '<div class="vocab-cheat-grid">';
+            
+            cheatsheetContent.vocabulary.forEach(category => {
+                html += `
+                    <div class="vocab-cheat-card">
+                        <div class="vocab-cheat-title">${category.category}</div>
+                        <div class="vocab-cheat-items">
+                            ${category.items.map(item => `<span class="vocab-tag">${item} <button onclick="speakText('${item.replace(/'/g, "\\'")}')" class="mini-audio">🔊</button></span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        function createCheatsheetPhrasesContent() {
+            let html = '<div class="phrases-cheat-grid">';
+            
+            cheatsheetContent.phrases.forEach(situation => {
+                html += `
+                    <div class="phrases-cheat-card">
+                        <div class="phrases-cheat-title">${situation.situation}</div>
+                        <div class="phrases-cheat-list">
+                            ${situation.phrases.map(phrase => `<div class="phrase-tag">${phrase} <button onclick="speakText('${phrase.replace(/'/g, "\\'")}')" class="mini-audio">🔊</button></div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        function createTestContent() {
+            let html = `
+                <div class="test-container">
+                    <div class="test-header">
+                        <h3>English A2 Practice Test</h3>
+                        <p>Answer all questions and click "Submit Test" to see your results.</p>
+                        <div class="test-progress">
+                            <span id="test-progress-text">Question 1 of ${testContent.sections.reduce((total, section) => total + section.questions.length, 0)}</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="test-progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-sections">
+            `;
+            
+            let questionNumber = 1;
+            testContent.sections.forEach((section, sectionIndex) => {
+                html += `<div class="test-section">
+                    <h4>${section.title}</h4>`;
+                
+                section.questions.forEach((question, questionIndex) => {
+                    if (question.passage) {
+                        html += `<div class="reading-passage">
+                            <strong>Read the text and answer the questions:</strong>
+                            <p>${question.passage}</p>
+                        </div>`;
+                    }
+                    
+                    html += `
+                        <div class="test-question" data-section="${sectionIndex}" data-question="${questionIndex}">
+                            <div class="question-header">
+                                <span class="question-number">${questionNumber}.</span>
+                                <span class="question-text">${question.question}</span>
+                                ${!question.passage ? `<button onclick="speakText('${question.question.replace(/'/g, "\\'")}')" style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 0.8em; margin-left: 8px;">🔊</button>` : ''}
+                            </div>
+                            <div class="question-options">
+                                ${question.options.map((option, optionIndex) => `
+                                    <label class="option-label">
+                                        <input type="radio" name="q${questionNumber}" value="${optionIndex}" onchange="updateTestProgress()">
+                                        <span class="option-text">${option}</span>
+                                        <button onclick="speakText('${option.replace(/'/g, "\\'")}')" style="background: #e8f5e8; color: #2e7d32; border: 1px solid #c8e6c9; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 0.7em; margin-left: 4px;">🔊</button>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    questionNumber++;
+                });
+                
+                html += '</div>';
+            });
+            
+            html += `
+                    </div>
+                    <div class="test-actions">
+                        <button class="submit-test-btn" onclick="submitTest()">Submit Test</button>
+                        <button class="reset-test-btn" onclick="resetTest()">Reset Test</button>
+                    </div>
+                    <div class="test-results" id="test-results" style="display: none;"></div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function updateTestProgress() {
+            const totalQuestions = testContent.sections.reduce((total, section) => total + section.questions.length, 0);
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progressPercent = (answeredQuestions / totalQuestions) * 100;
+            
+            document.getElementById('test-progress-text').textContent = `${answeredQuestions} of ${totalQuestions} answered`;
+            document.getElementById('test-progress-bar').style.width = `${progressPercent}%`;
+        }
+        
+        function submitTest() {
+            const totalQuestions = testContent.sections.reduce((total, section) => total + section.questions.length, 0);
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            
+            if (answeredQuestions < totalQuestions) {
+                alert(`Please answer all questions. You have answered ${answeredQuestions} out of ${totalQuestions} questions.`);
+                return;
+            }
+            
+            let score = 0;
+            let results = [];
+            let questionNumber = 1;
+            
+            testContent.sections.forEach((section, sectionIndex) => {
+                section.questions.forEach((question, questionIndex) => {
+                    const selectedAnswer = document.querySelector(`input[name="q${questionNumber}"]:checked`);
+                    const selectedValue = selectedAnswer ? parseInt(selectedAnswer.value) : -1;
+                    const isCorrect = selectedValue === question.correct;
+                    
+                    if (isCorrect) score++;
+                    
+                    results.push({
+                        questionNumber,
+                        question: question.question,
+                        selectedAnswer: selectedValue >= 0 ? question.options[selectedValue] : 'No answer',
+                        correctAnswer: question.options[question.correct],
+                        isCorrect,
+                        explanation: question.explanation
+                    });
+                    
+                    questionNumber++;
+                });
+            });
+            
+            const percentage = Math.round((score / totalQuestions) * 100);
+            showTestResults(score, totalQuestions, percentage, results);
+        }
+        
+        function showTestResults(score, total, percentage, results) {
+            const resultsDiv = document.getElementById('test-results');
+            
+            let gradeText = '';
+            let gradeClass = '';
+            if (percentage >= 80) {
+                gradeText = 'Excellent!';
+                gradeClass = 'grade-excellent';
+            } else if (percentage >= 60) {
+                gradeText = 'Good!';
+                gradeClass = 'grade-good';
+            } else if (percentage >= 40) {
+                gradeText = 'Fair';
+                gradeClass = 'grade-fair';
+            } else {
+                gradeText = 'Needs Improvement';
+                gradeClass = 'grade-poor';
+            }
+            
+            let html = `
+                <div class="results-header">
+                    <h3>Test Results</h3>
+                    <div class="score-display ${gradeClass}">
+                        <div class="score-number">${score}/${total}</div>
+                        <div class="score-percentage">${percentage}%</div>
+                        <div class="score-grade">${gradeText}</div>
+                    </div>
+                </div>
+                <div class="results-details">
+                    <h4>Detailed Results:</h4>
+            `;
+            
+            results.forEach(result => {
+                const statusClass = result.isCorrect ? 'correct' : 'incorrect';
+                const statusIcon = result.isCorrect ? '✅' : '❌';
+                
+                html += `
+                    <div class="result-item ${statusClass}">
+                        <div class="result-header">
+                            <span class="result-number">${result.questionNumber}.</span>
+                            <span class="result-status">${statusIcon}</span>
+                            <span class="result-question">${result.question}</span>
+                        </div>
+                        <div class="result-answers">
+                            <div class="your-answer">Your answer: ${result.selectedAnswer}</div>
+                            ${!result.isCorrect ? `<div class="correct-answer">Correct answer: ${result.correctAnswer}</div>` : ''}
+                            <div class="explanation">${result.explanation}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetTest() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('test-results').style.display = 'none';
+            updateTestProgress();
+            scrollToTop();
+        }
+
         function navigateTopic(direction) {
             const newIndex = currentTopicIndex + direction;
             if (newIndex >= 0 && newIndex < currentTopics.length) {
@@ -1659,5 +2276,7 @@
     <script src="js/vocabulary-content.js"></script>
     <script src="js/verbs-content.js"></script>
     <script src="js/writing-content.js"></script>
+    <script src="js/cheatsheet-content.js"></script>
+    <script src="js/test-content.js"></script>
 </body>
 </html>
