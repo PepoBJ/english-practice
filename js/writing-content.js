@@ -14,20 +14,20 @@ function loadWritingTopics() {
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                Last month, I had a small accident at home. I was walking in the kitchen when I fell down. There was water on the floor and I didn't see it. I hurt my arm when I fell.<br><br>
+                Last month, I had a small accident at home in Abancay. I was walking in the kitchen when I fell down. There was water on the floor and I didn't see it. I hurt my arm when I fell.<br><br>
                 
-                After the accident, I put some ice on my arm. It was very painful. My mother helped me and we went to see a doctor. The doctor said my arm was okay, but I needed to be careful.<br><br>
+                After the accident, I put some ice on my arm. It was very painful. My wife helped me and we went to see a doctor. The doctor said my arm was okay, but I needed to be careful.<br><br>
                 
-                It took about one week for my arm to feel better. During this time, I couldn't write very well at school. I had to use my other hand for some things.<br><br>
+                It took about one week for my arm to feel better. During this time, I couldn't work very well on my computer. I had to use my other hand for some things. My children helped me at home.<br><br>
                 
                 I felt scared at first because it hurt a lot. But I learned to be more careful when I walk. Now I always look at the floor before I walk, especially in the kitchen. I don't want to have another accident like this.
             `,
             exercises: [
-                { question: "Where did the accident happen?", answer: "In the kitchen at home" },
-                { question: "Why did the person fall?", answer: "There was water on the floor" },
+                { question: "Where did the accident happen?", answer: "In the kitchen at home in Abancay" },
+                { question: "Who helped after the accident?", answer: "His wife helped him" },
                 { question: "What part of the body was hurt?", answer: "The arm" },
                 { question: "How long did it take to feel better?", answer: "About one week" },
-                { question: "What did the person learn?", answer: "To be more careful when walking" }
+                { question: "Who helped him at home?", answer: "His children helped him" }
             ]
         },
         {
@@ -42,20 +42,20 @@ function loadWritingTopics() {
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                My biggest dream for the future is to become a teacher. I want to teach English to young children. I think teaching is a very good job because you can help people learn new things.<br><br>
+                My biggest dream for the future is to have my own technology company. I want to create software that helps people learn English better. I think this is a very good business because many people want to learn English.<br><br>
                 
-                I want to finish my studies in about three years. After that, I will look for a job at a school. I hope to start working as a teacher when I am 25 years old.<br><br>
+                I want to start this company in about two years. I am learning more about business and technology every day. I hope to have my first product ready when my children are a little older.<br><br>
                 
-                If I become a teacher, my life will be very different. I will have a good job and I can help my family. I will also meet many children and their parents. I think I will be very happy.<br><br>
+                If I have my own company, my life will be very different. I will have more time to spend with my family in Abancay. I can also help my wife with her work and give my children a better education.<br><br>
                 
-                This dream is important to me because I love children and I want to help them. When I was young, my teachers helped me a lot. Now I want to do the same for other children. Teaching is not just a job for me - it is something I really want to do.
+                This dream is important to me because I want to help my family have a better life. I also want to help other people learn English like I did. Having my own business will give me more freedom and I can work from home in Apurímac.
             `,
             exercises: [
-                { question: "What does the person want to become?", answer: "A teacher" },
-                { question: "What subject does she want to teach?", answer: "English" },
-                { question: "When does she want to start working?", answer: "When she is 25 years old" },
-                { question: "Why does she want to be a teacher?", answer: "She loves children and wants to help them" },
-                { question: "How will it change her life?", answer: "She will have a good job and help her family" }
+                { question: "What does the person want to do?", answer: "Have his own technology company" },
+                { question: "What kind of software does he want to create?", answer: "Software that helps people learn English" },
+                { question: "When does he want to start?", answer: "In about two years" },
+                { question: "Where does he live?", answer: "In Abancay, Apurímac" },
+                { question: "Why is this important to him?", answer: "To help his family have a better life and help others learn English" }
             ]
         },
         {
@@ -70,20 +70,20 @@ function loadWritingTopics() {
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                When I was a child, I had a small dog called Max. He was a brown and white dog with short hair. He was not very big, but he was very friendly and happy all the time.<br><br>
+                When I was younger, before I got married, I had a small dog called Max. He was a brown and white dog with short hair. He was not very big, but he was very friendly and happy all the time.<br><br>
                 
-                I took care of Max every day. I gave him food in the morning and evening. I also gave him water and took him for walks in the park. Sometimes I played with him in the garden.<br><br>
+                I took care of Max every day. I gave him food in the morning and evening. I also gave him water and took him for walks around Abancay. Sometimes I played with him in the garden.<br><br>
                 
-                I really loved Max because he was always happy to see me. When I came home from school, he ran to me and jumped up and down. He was like my best friend. But sometimes he was noisy and woke up the neighbors.<br><br>
+                I really loved Max because he was always happy to see me. When I came home from work, he ran to me and jumped up and down. He was like my best friend. But sometimes he was noisy and woke up the neighbors.<br><br>
                 
-                Dogs are very popular pets in my country. Many families have dogs because they are good friends and they can protect the house. I think dogs are the best pets because they love their families very much. I want to have another dog in the future.
+                Dogs are very popular pets in Apurímac. Many families have dogs because they are good friends and they can protect the house. Now I have two children, so we are thinking about getting a dog for them. I think dogs are the best pets for families.
             `,
             exercises: [
                 { question: "What was the dog's name?", answer: "Max" },
-                { question: "What did the dog look like?", answer: "Brown and white with short hair, not very big" },
-                { question: "How did the person take care of the dog?", answer: "Gave food and water, took for walks, played with him" },
-                { question: "What did the dog do when the person came home?", answer: "Ran to him and jumped up and down" },
-                { question: "Why are dogs popular pets?", answer: "They are good friends and can protect the house" }
+                { question: "When did he have this dog?", answer: "When he was younger, before he got married" },
+                { question: "Where did he take the dog for walks?", answer: "Around Abancay" },
+                { question: "How many children does he have now?", answer: "Two children" },
+                { question: "Why are dogs popular in Apurímac?", answer: "They are good friends and can protect the house" }
             ]
         },
         {
@@ -98,20 +98,20 @@ function loadWritingTopics() {
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                I lived in a small house with my family for many years. The house had two floors and four rooms. On the first floor, there was a kitchen, a living room, and a small bathroom. On the second floor, there were two bedrooms.<br><br>
+                I live in a comfortable house in Abancay with my family. The house has two floors and five rooms. On the first floor, there is a kitchen, a living room, and a small bathroom. On the second floor, there are two bedrooms and another bathroom.<br><br>
                 
-                The house was in a quiet street near the center of town. There were many trees around the house and a small garden in front. The neighbors were very friendly and we knew all of them.<br><br>
+                The house is in a quiet street in Abancay, Apurímac. There are mountains around our city and the air is very clean. The neighbors are very friendly and we know all of them. There is a small garden in front of our house.<br><br>
                 
-                I lived there with my parents and my younger brother. We were very happy in that house. My brother and I shared one bedroom, and my parents had the other bedroom.<br><br>
+                I live there with my wife and my two children. We are very happy in that house. My children have their own bedroom, and my wife and I have the other bedroom. We spend a lot of time together in the living room.<br><br>
                 
-                I loved living in that house because it was comfortable and peaceful. The garden was beautiful and I liked to sit there and read books. The house was also near my school, so I could walk there every day. It was a perfect place for a family like ours.
+                I love living in this house because it is perfect for my family. The garden is beautiful and my children like to play there. The house is also near my work, so I don't need to travel far every day. Abancay is a peaceful place to raise children.
             `,
             exercises: [
-                { question: "How many floors did the house have?", answer: "Two floors" },
-                { question: "What rooms were on the first floor?", answer: "Kitchen, living room, and small bathroom" },
-                { question: "Where was the house located?", answer: "In a quiet street near the center of town" },
-                { question: "Who lived in the house?", answer: "The person, parents, and younger brother" },
-                { question: "Why did the person like the house?", answer: "It was comfortable, peaceful, had a beautiful garden, and was near school" }
+                { question: "How many floors does the house have?", answer: "Two floors" },
+                { question: "Where is the house located?", answer: "In Abancay, Apurímac" },
+                { question: "Who lives in the house?", answer: "The person, his wife, and two children" },
+                { question: "What is around the city?", answer: "Mountains" },
+                { question: "Why does he like living there?", answer: "It's perfect for his family, has a garden, and is near his work" }
             ]
         },
         {
@@ -227,6 +227,34 @@ function loadWritingTopics() {
             ]
         },
         {
+            title: "DAY",
+            definition: "Describe a typical day in your life.",
+            structure: `
+                <strong>You should say:</strong><br>
+                • What time you wake up<br>
+                • What you do during the day<br>
+                • What you do in the evening<br>
+                • How you feel about your daily routine
+            `,
+            examples: `
+                <strong>Sample Writing:</strong><br><br>
+                I want to tell you about a typical day in my life in Abancay. I usually wake up at 6 AM when my alarm clock rings. The first thing I do is check my computer for work messages, then I brush my teeth and wash my face.<br><br>
+                
+                After breakfast with my family, I start working on my computer at home. I work as a data engineer, so I spend most of my day writing code and solving problems. My wife takes care of our two children and helps them get ready for school.<br><br>
+                
+                When I finish work at 5 PM, I spend time with my family. We eat dinner together at 7 PM and talk about our day. My children tell me about school and show me their homework. Sometimes we watch TV together.<br><br>
+                
+                In the evening, I help my children with their studies or we play games. I go to bed at 10 PM because I need to wake up early the next day. I like my daily routine because I can work from home and spend time with my family in Apurímac.
+            `,
+            exercises: [
+                { question: "What time does the person wake up?", answer: "At 6 AM" },
+                { question: "What is his job?", answer: "Data engineer" },
+                { question: "Where does he work?", answer: "At home on his computer" },
+                { question: "How many children does he have?", answer: "Two children" },
+                { question: "Where does he live?", answer: "In Abancay, Apurímac" }
+            ]
+        },
+        {
             title: "FAMILY",
             definition: "Describe a member of your family you admire.",
             structure: `
@@ -238,20 +266,20 @@ function loadWritingTopics() {
             `,
             examples: `
                 <strong>Sample Writing:</strong><br><br>
-                The person in my family I admire most is my grandmother. She is 75 years old but she is still very active and strong. She has gray hair and always wears a big smile on her face.<br><br>
+                The person in my family I admire most is my wife. She is a wonderful woman who takes care of our family every day. She has long black hair and always has a beautiful smile on her face.<br><br>
                 
-                My grandmother is a very kind and patient person. She never gets angry and always listens to everyone's problems. She loves to cook and makes the best food in our family. She also likes to tell us stories about her life when she was young.<br><br>
+                My wife is a very kind and patient person. She never gets angry with our children and always helps them with their problems. She is also very smart and helps me with my work sometimes. She knows how to cook the best food in Abancay.<br><br>
                 
-                Even though she is old, my grandmother still works in her small garden every day. She grows vegetables and flowers. She also helps take care of my little cousins when their parents are working.<br><br>
+                She takes care of our two children every day while I work on my computer. She helps them with their homework, takes them to school, and makes sure they are healthy and happy. She also keeps our house clean and organized.<br><br>
                 
-                I admire my grandmother because she is always happy and positive. She has lived through many difficult times, but she never complains. She taught me that family is the most important thing in life. She shows love to everyone and makes our family strong. I hope I can be like her when I am old.
+                I admire my wife because she is always positive and strong. She works very hard to make our family happy. She taught me that family is the most important thing in life. She shows love to everyone and makes our home in Apurímac a wonderful place to live.
             `,
             exercises: [
-                { question: "Who does the person admire?", answer: "His grandmother" },
-                { question: "How old is the grandmother?", answer: "75 years old" },
-                { question: "What does the grandmother like to do?", answer: "Cook, tell stories, work in garden, take care of cousins" },
-                { question: "What is the grandmother's personality like?", answer: "Kind, patient, never gets angry, always happy" },
-                { question: "Why does the person admire her?", answer: "She is always positive, shows love to everyone, makes family strong" }
+                { question: "Who does the person admire?", answer: "His wife" },
+                { question: "How many children do they have?", answer: "Two children" },
+                { question: "What does his wife do while he works?", answer: "Takes care of the children" },
+                { question: "Where do they live?", answer: "In Abancay, Apurímac" },
+                { question: "Why does he admire her?", answer: "She is positive, strong, works hard, and makes the family happy" }
             ]
         },
         {
