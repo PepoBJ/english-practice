@@ -1597,7 +1597,10 @@
                     break;
                     
                 case 'test':
-                    currentTopics = [{ title: 'Practice Test', type: 'test' }];
+                    currentTopics = [
+                        { title: 'Practice Test V1', type: 'test' },
+                        { title: 'Practice Test V2', type: 'test-v2' }
+                    ];
                     topicHTML = generateTopicHTML(currentTopics, 'selectTestTopic');
                     break;
             }
@@ -1893,11 +1896,20 @@
         
         function selectTestTopic(index) {
             currentTopicIndex = index;
-            elements.titleEl.textContent = 'Practice Test';
-            elements.subtitleEl.textContent = 'English A2 Level Assessment';
+            const topic = currentTopics[index];
             
-            const contentHTML = createTestContent();
-            elements.contentEl.innerHTML = contentHTML;
+            if (topic.type === 'test') {
+                elements.titleEl.textContent = 'Practice Test V1';
+                elements.subtitleEl.textContent = 'English A2 Level Assessment';
+                const contentHTML = createTestContent();
+                elements.contentEl.innerHTML = contentHTML;
+            } else if (topic.type === 'test-v2') {
+                elements.titleEl.textContent = 'Practice Test V2';
+                elements.subtitleEl.textContent = 'English A2 Level Assessment';
+                const contentHTML = createTestContentV2();
+                elements.contentEl.innerHTML = contentHTML;
+            }
+            
             updateNavigationButtons();
             scrollToTop();
             saveLastPosition();
@@ -1962,6 +1974,202 @@
             return html;
         }
         
+        function createTestContentV2() {
+            let html = `
+                <div class="test-container">
+                    <div class="test-header">
+                        <h3>English A2 Practice Test - Version 2</h3>
+                        <p>Answer all questions and click "Submit Test" to see your results.</p>
+                        <div class="test-progress">
+                            <span id="test-progress-text">Question 1 of ${testContentV2.sections.reduce((total, section) => total + section.questions.length, 0)}</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="test-progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-sections">
+            `;
+            
+            let questionNumber = 1;
+            testContentV2.sections.forEach((section, sectionIndex) => {
+                html += `<div class="test-section">
+                    <h4>${section.title}</h4>`;
+                
+                section.questions.forEach((question, questionIndex) => {
+                    if (question.passage) {
+                        html += `<div class="reading-passage">
+                            <strong>Read the text and answer the questions:</strong>
+                            <p>${question.passage}</p>
+                        </div>`;
+                    }
+                    
+                    html += `
+                        <div class="test-question" data-section="${sectionIndex}" data-question="${questionIndex}">
+                            <div class="question-header">
+                                <span class="question-number">${questionNumber}.</span>
+                                <span class="question-text">${question.question}</span>
+                                ${!question.passage ? `<button onclick="speakText('${question.question.replace(/'/g, "\\'")}')" style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 0.8em; margin-left: 8px;">🔊</button>` : ''}
+                            </div>
+                            <div class="question-options">
+                                ${question.options.map((option, optionIndex) => `
+                                    <label class="option-label">
+                                        <input type="radio" name="q${questionNumber}" value="${optionIndex}" onchange="updateTestProgressV2(); clearQuestionHighlight(${questionNumber})">
+                                        <span class="option-text">${option}</span>
+                                        <button onclick="speakText('${option.replace(/'/g, "\\'")}')" style="background: #e8f5e8; color: #2e7d32; border: 1px solid #c8e6c9; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 0.7em; margin-left: 4px;">🔊</button>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    questionNumber++;
+                });
+                
+                html += '</div>';
+            });
+            
+            html += `
+                    </div>
+                    <div class="test-actions">
+                        <button class="submit-test-btn" onclick="submitTestV2()">Submit Test</button>
+                        <button class="reset-test-btn" onclick="resetTestV2()">Reset Test</button>
+                    </div>
+                    <div class="test-results" id="test-results-v2" style="display: none;"></div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function updateTestProgressV2() {
+            const totalQuestions = testContentV2.sections.reduce((total, section) => total + section.questions.length, 0);
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progressPercent = (answeredQuestions / totalQuestions) * 100;
+            
+            document.getElementById('test-progress-text').textContent = `${answeredQuestions} of ${totalQuestions} answered`;
+            document.getElementById('test-progress-bar').style.width = `${progressPercent}%`;
+        }
+        
+        function submitTestV2() {
+            const totalQuestions = testContentV2.sections.reduce((total, section) => total + section.questions.length, 0);
+            const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked').length;
+            
+            if (answeredQuestions < totalQuestions) {
+                const unanswered = totalQuestions - answeredQuestions;
+                
+                // Highlight unanswered questions
+                highlightUnansweredQuestions();
+                
+                // Show friendly message
+                const message = unanswered === 1 ? 
+                    "Please answer the highlighted question before submitting." :
+                    `Please answer the ${unanswered} highlighted questions before submitting.`;
+                
+                showTestMessage(message, 'warning');
+                
+                // Scroll to first unanswered question
+                const firstUnanswered = document.querySelector('.test-question.unanswered');
+                if (firstUnanswered) {
+                    firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            let score = 0;
+            let results = [];
+            let questionNumber = 1;
+            
+            testContentV2.sections.forEach((section, sectionIndex) => {
+                section.questions.forEach((question, questionIndex) => {
+                    const selectedAnswer = document.querySelector(`input[name="q${questionNumber}"]:checked`);
+                    const selectedValue = selectedAnswer ? parseInt(selectedAnswer.value) : -1;
+                    const isCorrect = selectedValue === question.correct;
+                    
+                    if (isCorrect) score++;
+                    
+                    results.push({
+                        questionNumber,
+                        question: question.question,
+                        selectedAnswer: selectedValue >= 0 ? question.options[selectedValue] : 'No answer',
+                        correctAnswer: question.options[question.correct],
+                        isCorrect,
+                        explanation: question.explanation
+                    });
+                    
+                    questionNumber++;
+                });
+            });
+            
+            const percentage = Math.round((score / totalQuestions) * 100);
+            showTestResultsV2(score, totalQuestions, percentage, results);
+        }
+        
+        function showTestResultsV2(score, total, percentage, results) {
+            const resultsDiv = document.getElementById('test-results-v2');
+            
+            let gradeText = '';
+            let gradeClass = '';
+            if (percentage >= 80) {
+                gradeText = 'Excellent!';
+                gradeClass = 'grade-excellent';
+            } else if (percentage >= 60) {
+                gradeText = 'Good!';
+                gradeClass = 'grade-good';
+            } else if (percentage >= 40) {
+                gradeText = 'Fair';
+                gradeClass = 'grade-fair';
+            } else {
+                gradeText = 'Needs Improvement';
+                gradeClass = 'grade-poor';
+            }
+            
+            let html = `
+                <div class="results-header">
+                    <h3>Test Results - Version 2</h3>
+                    <div class="score-display ${gradeClass}">
+                        <div class="score-number">${score}/${total}</div>
+                        <div class="score-percentage">${percentage}%</div>
+                        <div class="score-grade">${gradeText}</div>
+                    </div>
+                </div>
+                <div class="results-details">
+                    <h4>Detailed Results:</h4>
+            `;
+            
+            results.forEach(result => {
+                const statusClass = result.isCorrect ? 'correct' : 'incorrect';
+                const statusIcon = result.isCorrect ? '✅' : '❌';
+                
+                html += `
+                    <div class="result-item ${statusClass}">
+                        <div class="result-header">
+                            <span class="result-number">${result.questionNumber}.</span>
+                            <span class="result-status">${statusIcon}</span>
+                            <span class="result-question">${result.question}</span>
+                        </div>
+                        <div class="result-answers">
+                            <div class="your-answer">Your answer: ${result.selectedAnswer}</div>
+                            ${!result.isCorrect ? `<div class="correct-answer">Correct answer: ${result.correctAnswer}</div>` : ''}
+                            <div class="explanation">${result.explanation}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function resetTestV2() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('test-results-v2').style.display = 'none';
+            updateTestProgressV2();
+            scrollToTop();
+        }
+
         function createTestContent() {
             let html = `
                 <div class="test-container">
@@ -2402,5 +2610,6 @@
     <script src="js/writing-content.js"></script>
     <script src="js/cheatsheet-content.js"></script>
     <script src="js/test-content.js"></script>
+    <script src="js/test-content-v2.js"></script>
 </body>
 </html>
